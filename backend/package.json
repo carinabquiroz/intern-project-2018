@@ -1,0 +1,17 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "dev": "./scripts/dev.sh",
+    "server": "./scripts/server.sh",
+    "new-migration": "node-pg-migrate create"
+  },
+  "dependencies": {
+    "node-pg-migrate": "^3.8.0",
+    "pg": "^7.4.3",
+    "pg-hstore": "^2.3.2",
+    "pg-native": "^3.0.0"
+  }
+}
