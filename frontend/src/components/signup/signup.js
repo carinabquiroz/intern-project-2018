@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 
 class Signup extends React.Component {
+  //TODO: extract out into components, use react-router to make into it's own page
   constructor(props) {
     super(props);
     this.state = { username: '', password: '' };
@@ -19,6 +20,7 @@ class Signup extends React.Component {
   }
 
   handleSubmit(event) {
+    //TODO: make sure passwords meet some standard
     fetch('/users', {
       method: 'POST',
       headers: {
