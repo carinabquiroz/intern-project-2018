@@ -1,5 +1,7 @@
-var express = require('express');
+import storeUser from '../utils/storeUser';
+import express from 'express';
 var router = express.Router();
+
 
 /* GET users listing. */
 router.get('/', (req, res, next) => {
@@ -15,7 +17,8 @@ router.get('/', (req, res, next) => {
 });
 
 router.post('/', (req, res) => {
-  console.log(req.body);
+  console.log('Adding user to db');
+  storeUser(req.body);
   res.end();
 });
 
