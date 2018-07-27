@@ -1,4 +1,3 @@
-import login from '../utils/login';
 import db from '../db';
 import bcrypt from 'bcrypt';
 import express from 'express';
