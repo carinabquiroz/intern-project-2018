@@ -8,8 +8,8 @@ import styled from 'styled-components';
 
 import logo from './logo.svg';
 import './App.css';
-import Signup from './components/signup/';
-import Login from './components/login/'
+import Register from './components/register/';
+import Login from './components/login/';
 import Home from './components/home/';
 import BasicExample from './components/examples/router';
 
@@ -26,12 +26,12 @@ const App = () => (
       </header>
       <ul>
         <li><Link to='/'>Home</Link></li>
-        <li><Link to='/signup'>Signup</Link></li>
-        <li><Link to='/login'>Signup</Link></li>
+        <li><Link to='/register'>Register</Link></li>
+        <li><Link to='/login'>Login</Link></li>
       </ul>
       <hr />
       <Route exact path='/' component={Home}/>
-      <Route path='/signup' component ={Signup} />
+      <Route path='/register' component ={Register} />
       <Route path='/login' component ={Login} />
     </StyledDiv>
   </Router>

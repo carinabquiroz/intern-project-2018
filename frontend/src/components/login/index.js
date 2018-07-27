@@ -25,7 +25,10 @@ class Login extends React.Component {
         'content-type': 'application/json',
       },
       body: JSON.stringify({ username: this.state.username, password: this.state.password }),
-    });
+    })
+      .then(res => {
+        console.log(res);
+      });
     event.preventDefault();
   }
 
