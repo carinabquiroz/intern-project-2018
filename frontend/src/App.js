@@ -11,6 +11,7 @@ import './App.css';
 import Register from './components/register/';
 import Login from './components/login/';
 import Home from './components/home/';
+import CreateEvent from './components/createEvent/'
 import BasicExample from './components/examples/router';
 
 const StyledDiv = styled.div`
@@ -28,11 +29,13 @@ const App = () => (
         <li><Link to='/'>Home</Link></li>
         <li><Link to='/register'>Register</Link></li>
         <li><Link to='/login'>Login</Link></li>
+        <li><Link to='/createEvent'>Create Event</Link></li>
       </ul>
       <hr />
       <Route exact path='/' component={Home}/>
       <Route path='/register' component ={Register} />
       <Route path='/login' component ={Login} />
+      <Route path='/createEvent' component ={CreateEvent} />
     </StyledDiv>
   </Router>
 );
