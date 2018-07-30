@@ -27,6 +27,13 @@ class Register extends React.Component {
         'content-type': 'application/json',
       },
       body: JSON.stringify({ username: this.state.username, password: this.state.password }),
+    })
+    .then(res => {
+      if (res.status == 200) {
+        return res.json();
+      }})
+    .then(json => {
+      window.localStorage.setItem('token', (json.token));
     });
     event.preventDefault();
   }

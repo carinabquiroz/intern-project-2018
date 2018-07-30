@@ -26,9 +26,13 @@ class Login extends React.Component {
       },
       body: JSON.stringify({ username: this.state.username, password: this.state.password }),
     })
-      .then(res => {
-        console.log(res);
-      });
+    .then(res => {
+      if (res.status == 200) {
+        return res.json();
+      }})
+    .then(json => {
+      window.localStorage.setItem('token', (json.token));
+    });
     event.preventDefault();
   }
 
