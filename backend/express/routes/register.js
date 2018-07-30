@@ -13,13 +13,15 @@ router.post('/', (req, res) => {
   db.user.create({
     username: req.body.username,
     hash: hashedPassword,
-  }).then(user => {
+  })
+  .then(user => {
       var token = jwt.sign({ id: user._id }, process.env.FAKE_SECRET, {
         expiresIn: 86400,
       });
       res.status(200).send({ auth: true, token: token });
     }
-  ).catch(err => res.status(500).send('There was a problem registering the user'));
+  )
+  .catch(err => res.status(500).send('There was a problem registering the user'));
 });
 
 module.exports = router;

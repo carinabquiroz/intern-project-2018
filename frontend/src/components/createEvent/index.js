@@ -44,11 +44,12 @@ class CreateEvent extends React.Component {
       method: 'POST',
       headers: {
         'content-type': 'application/json',
+        'x-access-token': window.localStorage.getItem('token')
       },
       body: JSON.stringify(this.state),
     })
       .then(res => {
-        console.log(res);
+        console.log(res.status);
       });
     event.preventDefault();
   }
