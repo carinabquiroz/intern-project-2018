@@ -4,8 +4,8 @@ class CreateEvent extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      username: '',
-      password: '',
+      title: '',
+      description: '',
       date: '',
       time: '',
       location: '',
@@ -20,11 +20,11 @@ class CreateEvent extends React.Component {
   }
 
   handleTitleChange(event) {
-    this.setState({ username: event.target.value });
+    this.setState({ title: event.target.value });
   }
 
   handleDescriptionChange(event) {
-    this.setState({ password: event.target.value });
+    this.setState({ description: event.target.value });
   }
 
   handleDateChange(event) {
