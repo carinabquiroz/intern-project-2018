@@ -4,7 +4,7 @@ class EventPage extends React.Component {
 
   render() {
     return (
-      <div className="App">
+      <div>
         <h3>{this.props.info.title}</h3>
         <h3>{this.props.info.description}</h3>
         <h3>{this.props.info.date}</h3>
