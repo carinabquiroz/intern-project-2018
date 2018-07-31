@@ -12,6 +12,7 @@ import Register from './components/register/';
 import Login from './components/login/';
 import Home from './components/home/';
 import CreateEvent from './components/createEvent/'
+import ListEvents from './components/listEvents/'
 import BasicExample from './components/examples/router';
 
 const StyledDiv = styled.div`
@@ -30,12 +31,14 @@ const App = () => (
         <li><Link to='/register'>Register</Link></li>
         <li><Link to='/login'>Login</Link></li>
         <li><Link to='/createEvent'>Create Event</Link></li>
+        <li><Link to='/listEvents'>List Events</Link></li>
       </ul>
       <hr />
       <Route exact path='/' component={Home}/>
       <Route path='/register' component ={Register} />
       <Route path='/login' component ={Login} />
       <Route path='/createEvent' component ={CreateEvent} />
+      <Route exact path='/listEvents' component ={ListEvents} />
     </StyledDiv>
   </Router>
 );
