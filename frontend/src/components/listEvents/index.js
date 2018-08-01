@@ -15,9 +15,10 @@ class ListEvents extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      events: []
+      events: [],
     };
   }
+
   componentDidMount() {
     fetch('/events')
       .then(res => res.json())

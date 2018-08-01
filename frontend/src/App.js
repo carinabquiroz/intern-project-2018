@@ -28,12 +28,13 @@ class App extends Component {
     } else {
       this.state = { loggedIn: false };
     }
-    
+
     this.login = this.login.bind(this);
     this.logout = this.logout.bind(this);
   }
 
-  login() {
+  login(token) {
+    window.localStorage.setItem('token', (token));
     this.setState({ loggedIn: true });
   }
 
