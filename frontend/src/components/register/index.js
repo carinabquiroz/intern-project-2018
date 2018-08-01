@@ -34,7 +34,6 @@ class Register extends Component {
       }
     })
     .then(json => {
-      window.localStorage.setItem('token', (json.token));
       this.props.login(json.token);
     });
     event.preventDefault();

@@ -32,8 +32,7 @@ class Login extends Component {
       }
     })
     .then(json => {
-      window.localStorage.setItem('token', (json.token));
-      this.props.login();
+      this.props.login(json.token);
     });
     event.preventDefault();
   }
