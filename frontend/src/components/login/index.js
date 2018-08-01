@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 
+import login from '../../utils/login';
+
 class Login extends Component {
   constructor(props) {
     super(props);
@@ -19,21 +21,7 @@ class Login extends Component {
   }
 
   handleSubmit(event) {
-    fetch('/login', {
-      method: 'POST',
-      headers: {
-        'content-type': 'application/json',
-      },
-      body: JSON.stringify({ username: this.state.username, password: this.state.password }),
-    })
-    .then(res => {
-      if (res.status === 200) {
-        return res.json();
-      }
-    })
-    .then(json => {
-      this.props.login(json.token);
-    });
+    login(this.props, this.state);
     event.preventDefault();
   }
 
