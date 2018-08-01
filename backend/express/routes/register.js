@@ -15,9 +15,7 @@ router.post('/', (req, res) => {
     hash: hashedPassword,
   })
   .then(user => {
-      var token = jwt.sign({ id: user.id }, process.env.FAKE_SECRET, {
-        expiresIn: 86400,
-      });
+      var token = jwt.sign({ id: user.id }, process.env.FAKE_SECRET);
       res.status(200).send({ auth: true, token: token });
     }
   )

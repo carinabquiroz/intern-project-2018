@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-class Register extends React.Component {
+class Register extends Component {
   //TODO: extract out into components, use react-router to make into it's own page
   constructor(props) {
     super(props);
@@ -29,11 +29,13 @@ class Register extends React.Component {
       body: JSON.stringify({ username: this.state.username, password: this.state.password }),
     })
     .then(res => {
-      if (res.status == 200) {
+      if (res.status === 200) {
         return res.json();
-      }})
+      }
+    })
     .then(json => {
       window.localStorage.setItem('token', (json.token));
+      this.props.login(json.token);
     });
     event.preventDefault();
   }

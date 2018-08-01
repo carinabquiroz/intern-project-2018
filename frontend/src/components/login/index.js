@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-class Login extends React.Component {
+class Login extends Component {
   constructor(props) {
     super(props);
     this.state = { username: '', password: '' };
@@ -27,11 +27,13 @@ class Login extends React.Component {
       body: JSON.stringify({ username: this.state.username, password: this.state.password }),
     })
     .then(res => {
-      if (res.status == 200) {
+      if (res.status === 200) {
         return res.json();
-      }})
+      }
+    })
     .then(json => {
       window.localStorage.setItem('token', (json.token));
+      this.props.login();
     });
     event.preventDefault();
   }

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-class CreateEvent extends React.Component {
+class CreateEvent extends Component {
   constructor(props) {
     super(props);
     this.state = {

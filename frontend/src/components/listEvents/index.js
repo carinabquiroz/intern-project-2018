@@ -11,7 +11,7 @@ const StyledDiv = styled.div`
   text-align: center;
 `;
 
-class ListEvents extends React.Component {
+class ListEvents extends Component {
   constructor(props) {
     super(props);
     this.state = {
