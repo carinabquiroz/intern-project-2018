@@ -44,7 +44,7 @@ class CreateEvent extends Component {
       method: 'POST',
       headers: {
         'content-type': 'application/json',
-        'x-access-token': window.localStorage.getItem('token')
+        'x-access-token': window.localStorage.getItem('token'),
       },
       body: JSON.stringify(this.state),
     })

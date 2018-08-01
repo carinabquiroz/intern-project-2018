@@ -31,6 +31,27 @@ class App extends Component {
 
     this.login = this.login.bind(this);
     this.logout = this.logout.bind(this);
+    this.checkAuth = this.checkAuth.bind(this);
+  }
+
+  componentWillMount () {
+    this.checkAuth();
+  }
+
+  async checkAuth() {
+    const token = window.localStorage.getItem('token');
+    if (token) {
+      const jsonPromise = await fetch('/auth', {
+          method: 'POST',
+          headers: { 'content-type': 'application/json',
+          },
+          body: JSON.stringify({ token: token }),
+        });
+      const result = await jsonPromise.json();
+      this.setState({ loggedIn: result.auth });
+    } else {
+      this.setState({ loggedIn: false });
+    }
   }
 
   login(token) {
@@ -39,6 +60,7 @@ class App extends Component {
   }
 
   logout() {
+    window.localStorage.removeItem('token');
     this.setState({ loggedIn: false });
   }
 
