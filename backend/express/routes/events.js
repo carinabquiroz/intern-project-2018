@@ -6,9 +6,8 @@ import db from '../db';
 router.get('/', (req, res, next) => {
   db.event.findAll()
     .then(events => {
-      res.json(events).send();
+      res.json(events).end();
     });
 });
-
 
 module.exports = router;

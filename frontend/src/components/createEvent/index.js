@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-class CreateEvent extends React.Component {
+class CreateEvent extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -44,7 +44,7 @@ class CreateEvent extends React.Component {
       method: 'POST',
       headers: {
         'content-type': 'application/json',
-        'x-access-token': window.localStorage.getItem('token')
+        'x-access-token': window.localStorage.getItem('token'),
       },
       body: JSON.stringify(this.state),
     })

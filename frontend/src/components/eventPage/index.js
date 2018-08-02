@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { Component } from 'react';
 
-class EventPage extends React.Component {
+class EventPage extends Component {
 
   render() {
     return (

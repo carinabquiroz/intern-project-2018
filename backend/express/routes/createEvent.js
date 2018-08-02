@@ -15,9 +15,9 @@ router.post('/', verifyToken, (req, res) => {
         date: req.body.date,
         time: req.body.time,
         location: req.body.location,
-        attendees: [user.username]
-  })
-    })
+        attendees: [user.username],
+      });
+    });
   res.end();
 });
 

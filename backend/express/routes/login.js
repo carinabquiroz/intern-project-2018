@@ -13,9 +13,7 @@ router.post('/', (req, res) => {
     if (!user) return res.status(401).send({ auth: false, token: null });
     const passwordIsValid = bcrypt.compareSync(password, user.hash);
     if (!passwordIsValid) return res.status(401).send({ auth: false, token: null });
-    const token = jwt.sign({ id: user.id }, process.env.FAKE_SECRET, {
-      expiresIn: 86400,
-    });
+    const token = jwt.sign({ id: user.id }, process.env.FAKE_SECRET);
     res.status(200).send({ auth: true, token: token });
   })
   .catch(err => {
