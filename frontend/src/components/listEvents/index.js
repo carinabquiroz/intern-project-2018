@@ -1,12 +1,13 @@
 
 import React, { Component } from 'react';
 import {
-  BrowserRouter as Router,
   Route,
-  Link
+  Switch,
 } from 'react-router-dom';
 import styled from 'styled-components';
-import EventPage from '../eventPage/'
+import EventPage, { NotFound } from '../eventPage/';
+import EventList from './eventList';
+
 const StyledDiv = styled.div`
   text-align: center;
 `;
@@ -28,23 +29,22 @@ class ListEvents extends Component {
   render() {
     console.log(this.state.events);
     return (
-      <Router>
-        <StyledDiv>
-          <ul>
-          <div>
-            {this.state.events.map(event =>
-              <li key={event.id}><Link to={"/event/"+event.id}>{event.title}</Link></li>
-            )}
-          </div>
-          </ul>
-          <hr />
-          <div>
-            {this.state.events.map(event =>
-              <Route path={"/event/"+event.id} key={event.id} render={() => <EventPage info={event} />} />
-            )}
-          </div>
-        </StyledDiv>
-      </Router>
+      <StyledDiv>
+        <Switch>
+          {this.state.events.map(event =>
+            <Route
+                path={'/events/' + event.id}
+                key={event.id}
+                render={() => <EventPage info={event} />}
+            />
+          )}
+          <Route
+            exact path='/events'
+            render={() => <EventList events={this.state.events} />}
+          />
+          <Route path='/events/*' component = {NotFound} />
+        </Switch>
+      </StyledDiv>
     );
   }
 }
