@@ -77,7 +77,7 @@ class App extends Component {
             <li><Link to='/register'>Register</Link></li>
             <li><Link to='/login'>Login</Link></li>
             <li><Link to='/createEvent'>Create Event</Link></li>
-            <li><Link to='/listEvents'>List Events</Link></li>
+            <li><Link to='/events'>List Events</Link></li>
           </ul>
           <hr />
           <Route exact path='/' component={Home}/>
@@ -85,8 +85,8 @@ class App extends Component {
           <Route path='/login' render={() => <Login login={this.login} />} />
           <Route path='/createEvent' component ={CreateEvent} />
           <ProtectedRoute
-            path='/listEvents'
-            component ={ListEvents}
+            path='/events'
+            component = {ListEvents}
             loggedIn = {this.state.loggedIn} />
         </StyledDiv>
       </Router>
