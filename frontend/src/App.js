@@ -21,7 +21,6 @@ const StyledDiv = styled.div`
 `;
 
 class App extends Component {
-
   constructor(props) {
     super(props);
     if (window.localStorage.getItem('token')) {
@@ -58,6 +57,7 @@ class App extends Component {
   login(token) {
     window.localStorage.setItem('token', (token));
     this.setState({ loggedIn: true });
+
   }
 
   logout() {
@@ -77,11 +77,12 @@ class App extends Component {
           <Route exact path='/' component={Home}/>
           <Route path='/register' render={() => <Register login={this.login} />} />
           <Route path='/login' render={() => <Login login={this.login} />} />
-          <Route path='/createEvent' component ={CreateEvent} />
-          <ProtectedRoute
+          <Route path='/createEvent' component = {CreateEvent} />
+          <Route
             path='/events'
-            component = {ListEvents}
-            loggedIn = {this.state.loggedIn} />
+            render={(props) =>
+              <ListEvents loggedIn={this.state.loggedIn} {...props} />}
+          />
         </StyledDiv>
       </Router>
     );

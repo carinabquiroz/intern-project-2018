@@ -27,7 +27,6 @@ class ListEvents extends Component {
   }
 
   render() {
-    console.log(this.state.events);
     return (
       <StyledDiv>
         <Switch>
@@ -35,7 +34,12 @@ class ListEvents extends Component {
             <Route
                 path={'/events/' + event.id}
                 key={event.id}
-                render={() => <EventPage info={event} />}
+                render={() =>
+                  <EventPage
+                  info={event}
+                  loggedIn={this.props.loggedIn}
+                  {...this.props}
+                  />}
             />
           )}
           <Route
