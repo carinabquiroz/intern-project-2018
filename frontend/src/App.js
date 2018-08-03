@@ -14,6 +14,7 @@ import Home from './components/home/';
 import CreateEvent from './components/createEvent/';
 import ListEvents from './components/listEvents/';
 import ProtectedRoute from './components/protectedRoute';
+import Navbar from './components/navbar';
 
 const StyledDiv = styled.div`
   text-align: center;
@@ -68,17 +69,10 @@ class App extends Component {
     return (
       <Router>
         <StyledDiv>
-          <header className='App-header'>
-            <img src={logo} className='App-logo' alt='logo' />
-            <h1 className='App-title'>Welcome to React</h1>
-          </header>
-          <ul>
-            <li><Link to='/'>Home</Link></li>
-            <li><Link to='/register'>Register</Link></li>
-            <li><Link to='/login'>Login</Link></li>
-            <li><Link to='/createEvent'>Create Event</Link></li>
-            <li><Link to='/events'>List Events</Link></li>
-          </ul>
+          <Navbar
+            loggedIn={this.state.loggedIn}
+            checkAuth={this.checkAuth}
+            logout={this.logout}/>
           <hr />
           <Route exact path='/' component={Home}/>
           <Route path='/register' render={() => <Register login={this.login} />} />
