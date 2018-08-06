@@ -6,9 +6,11 @@ const verifyToken = (req, res, next) => {
   try {
     const decoded = jwt.verify(token, process.env.FAKE_SECRET);
     req.userId = decoded.id;
-  } catch(error) {
+    req.username = decoded.username;
+  } catch (error) {
     return res.status(500).send({ auth: false, message: 'Failed to authenticate token.' });
   }
+
   next();
 };
 

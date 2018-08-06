@@ -4,12 +4,12 @@ import {
   Redirect,
 } from 'react-router-dom';
 
-const ProtectedRoute = ({ component: Component, loggedIn, ...rest }) => (
+const ProtectedRoute = ({ component: Component, loggedIn, componentProps, ...rest }) => (
   <Route
     {...rest}
     render = { props =>
       loggedIn ? (
-        <Component {...props} />
+        <Component {...props} {...componentProps} />
       ) : (
         <Redirect
           to={{
