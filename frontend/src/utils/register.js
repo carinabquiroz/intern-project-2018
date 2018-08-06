@@ -9,6 +9,8 @@ const register = (props, state) => {
   .then(res => {
     if (res.status === 200) {
       return res.json();
+    } else {
+      console.log('something went wrong');
     }
   })
   .then(json => {

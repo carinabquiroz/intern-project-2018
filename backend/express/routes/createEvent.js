@@ -1,6 +1,6 @@
 import express from 'express';
 import verifyToken from '../auth/authorizeUser';
-
+import Sequelize from 'sequelize';
 import db from '../db';
 
 var router = express.Router();
@@ -15,8 +15,13 @@ router.post('/', verifyToken, (req, res) => {
         date: req.body.date,
         time: req.body.time,
         location: req.body.location,
-        attendees: [user.username],
-      });
+        attendees: [],
+      })
+      .then(event => {
+        db.user.update(
+          { hosting: Sequelize.fn('array_append', Sequelize.col('hosting'), event.id) },
+          { where: { id: req.userId } });
+        })
     });
   res.end();
 });
