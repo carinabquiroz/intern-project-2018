@@ -20,7 +20,6 @@ router.post('/', (req, res) => {
     }
   )
   .catch(err => {
-    console.log(err);
     res.status(500).send('There was a problem registering the user');
   });
 });
