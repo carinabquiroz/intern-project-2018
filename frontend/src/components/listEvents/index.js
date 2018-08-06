@@ -3,10 +3,12 @@ import React, { Component } from 'react';
 import {
   Route,
   Switch,
+  Link,
 } from 'react-router-dom';
 import styled from 'styled-components';
 import EventPage, { NotFound } from '../eventPage/';
 import EventList from './eventList';
+import MyEvents from './myevents';
 
 const StyledDiv = styled.div`
   text-align: center;
@@ -29,6 +31,7 @@ class ListEvents extends Component {
   render() {
     return (
       <StyledDiv>
+        <Link to='/events/myevents'>My Events</Link>
         <Switch>
           {this.state.events.map(event =>
             <Route
@@ -42,6 +45,7 @@ class ListEvents extends Component {
                   />}
             />
           )}
+          <Route path='/events/myevents' component={MyEvents} />
           <Route
             exact path='/events'
             render={() => <EventList events={this.state.events} />}
