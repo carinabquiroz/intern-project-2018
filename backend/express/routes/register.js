@@ -19,7 +19,9 @@ router.post('/', (req, res) => {
       res.status(200).send({ auth: true, token: token });
     }
   )
-  .catch(err => res.status(500).send('There was a problem registering the user'));
+  .catch(err => {
+    res.status(500).send('There was a problem registering the user');
+  });
 });
 
 module.exports = router;
