@@ -13,6 +13,7 @@ var eventsRouter = require('./routes/events');
 var authRouter = require('./routes/auth');
 var attendEventRouter = require('./routes/attendEvent');
 var userEventsRouter = require('./routes/userEvents');
+var checkUniqueUsernameRouter = require('./routes/checkUniqueUsername');
 
 var app = express();
 
@@ -37,6 +38,7 @@ app.use('/events', eventsRouter);
 app.use('/auth', authRouter);
 app.use('/attendEvent', attendEventRouter);
 app.use('/userEvents', userEventsRouter);
+app.use('/checkUniqueUsername', checkUniqueUsernameRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
