@@ -27,7 +27,6 @@ class ListEvents extends Component {
   }
 
   render() {
-    console.log(this.state.events);
     return (
       <StyledDiv>
         <Switch>
