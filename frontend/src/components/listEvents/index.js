@@ -23,9 +23,10 @@ class ListEvents extends Component {
       hosting: [],
       attending: [],
     };
+    this.loadEvents = this.loadEvents.bind(this);
   }
 
-  componentDidMount() {
+  loadEvents() {
     fetch('/events',{
       method: 'GET',
       headers: {
@@ -33,13 +34,17 @@ class ListEvents extends Component {
         'x-access-token': window.localStorage.getItem('token'),
       },
     })
-      .then(res => res.json())
-      .then(json => this.setState({
-        events: json.events,
-        hosting: json.hosting,
-        attending: json.attending
-      }))
-      .catch(error => console.log(error));
+    .then(res => res.json())
+    .then(json => this.setState({
+      events: json.events,
+      hosting: json.hosting,
+      attending: json.attending
+    }))
+    .catch(error => console.log(error));
+  }
+
+  componentDidMount() {
+    this.loadEvents();
   }
 
   render() {
@@ -58,6 +63,7 @@ class ListEvents extends Component {
                   {...this.props}
                   isHosting={this.state.hosting.includes(event.id)}
                   isAttending={this.state.attending.includes(event.id)}
+                  loadEvents={this.loadEvents}
                   />}
             />
           )}
@@ -69,10 +75,11 @@ class ListEvents extends Component {
               hostingIds: this.state.hosting,
               attendingIds: this.state.attending,
               events: this.state.events,
+              loadEvents: this.loadEvents
             }} />
           <Route
             exact path='/events'
-            render={() => <EventList events={this.state.events} />}
+            render={() => <EventList events={this.state.events} loadEvents={this.loadEvents} />}
           />
           <Route path='/events/*' component = {NotFound} />
         </Switch>
