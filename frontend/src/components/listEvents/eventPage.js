@@ -6,6 +6,8 @@ class EventPage extends Component {
     super(props);
     this.state = { redirect: false };
     this.attendEvent = this.attendEvent.bind(this);
+    this.deleteEvent = this.deleteEvent.bind(this);
+    this.unattendEvent = this.unattendEvent.bind(this);
   }
 
   attendEvent() {
@@ -20,12 +22,41 @@ class EventPage extends Component {
         body: JSON.stringify({ eventId: this.props.info.id }),
       })
         .then(res => {
-          console.log(res.status);
           this.props.loadEvents()
         });
     } else {
       this.setState({ redirect: true });
     }
+  }
+
+  deleteEvent() {
+    fetch('/deleteEvent', {
+      method: 'POST',
+      headers: {
+        'content-type': 'application/json',
+        'x-access-token': window.localStorage.getItem('token'),
+      },
+      body: JSON.stringify({ eventId: this.props.info.id }),
+    })
+      .then(res => {
+        console.log('event deleted')
+        this.props.loadEvents()
+      })
+  }
+
+  unattendEvent() {
+    fetch('/unattendEvent', {
+      method: 'POST',
+      headers: {
+        'content-type': 'application/json',
+        'x-access-token': window.localStorage.getItem('token'),
+      },
+      body: JSON.stringify({ eventId: this.props.info.id }),
+    })
+      .then(res => {
+        console.log('event unattended')
+        this.props.loadEvents()
+      })
   }
 
   render() {
@@ -44,11 +75,17 @@ class EventPage extends Component {
         }
         {
           this.props.isHosting &&
-          <div> You are hosting this event! </div>
+          <div><div> You are hosting this event! </div>
+          <button onClick={this.deleteEvent}>
+            Delete Event
+          </button></div>
         }
         {
           this.props.isAttending &&
-          <div> You are attending this event! </div>
+          <div><div> You are attending this event! </div>
+          <button onClick={this.unattendEvent}>
+            Cancel Attendance
+          </button></div>
         }
         {this.state.redirect && <Redirect
           to={{
