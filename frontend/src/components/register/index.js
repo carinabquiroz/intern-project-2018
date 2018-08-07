@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { withRouter, Redirect } from 'react-router-dom';
 
 import register from '../../utils/register';
 import isGoodPassword from '../../utils/password';
@@ -39,7 +40,7 @@ class Register extends Component {
       .then(res => res.json())
       .then(json => {
         this.setState({ isUnique: json.isUnique });
-      })
+      });
   }
 
   async handleSubmit(event) {
@@ -48,28 +49,35 @@ class Register extends Component {
     if (isGoodUsername(this.state.username)
       && isGoodPassword(this.state.password)
       && this.state.isUnique) {
-      this.setState({badRegistration: false})
+      this.setState({ badRegistration: false });
       register(this.props, this.state);
-    } else {this.setState({badRegistration: true})};
+    } else {
+      this.setState({ badRegistration: true });
+    };
   }
 
   render() {
+    const { from } = this.props.location.state || { from: { pathname: '/' } };
     return (
-      <form onSubmit={ this.handleSubmit }>
-        <label>
-          Username:
-          <input type="text" name="name" onChange={ this.handleUsernameChange }/>
-        </label>
-        <br />
-        <label>
-          Password:
-          <input type="password" name="name" onChange={ this.handlePasswordChange }/>
-        </label>
-        <input type="submit" value="Submit" />
-        {this.state.badRegistration && <div>Could not make account. Username or password is bad.</div>}
-      </form>
+      <div>
+        {this.props.loggedIn && <Redirect to={from} />}
+        <form onSubmit={ this.handleSubmit }>
+          <label>
+            Username:
+            <input type="text" name="name" onChange={ this.handleUsernameChange }/>
+          </label>
+          <br />
+          <label>
+            Password:
+            <input type="password" name="name" onChange={ this.handlePasswordChange }/>
+          </label>
+          <input type="submit" value="Submit" />
+          {this.state.badRegistration &&
+            <div>Could not make account. Username or password is bad.</div>}
+        </form>
+      </div>
     );
   }
 };
 
-export default Register;
+export default withRouter(Register);

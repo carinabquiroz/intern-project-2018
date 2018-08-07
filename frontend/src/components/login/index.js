@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { withRouter, Redirect } from 'react-router-dom';
+import { withRouter, Redirect, Link } from 'react-router-dom';
 
 import login from '../../utils/login';
 
@@ -43,6 +43,10 @@ class Login extends Component {
           </label>
           <input type="submit" value="Submit" />
         </form>
+        <Link to={{
+          pathname: '/register',
+          state: { from },
+        }}>New? Register here</Link>
       </div>
     );
   }

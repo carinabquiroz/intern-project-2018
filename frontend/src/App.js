@@ -57,7 +57,6 @@ class App extends Component {
   login(token) {
     window.localStorage.setItem('token', (token));
     this.setState({ loggedIn: true });
-
   }
 
   logout() {
@@ -75,10 +74,15 @@ class App extends Component {
             logout={this.logout}/>
           <hr />
           <Route exact path='/' component={Home}/>
-          <Route path='/register' render={() => <Register login={this.login} />} />
-          <Route path='/login' render={() => <Login
-                login={this.login}
-                loggedIn = {this.state.loggedIn}/>
+          <Route path='/register' render={() =>
+            <Register
+              login={this.login}
+              loggedIn = {this.state.loggedIn} />
+          } />
+          <Route path='/login' render={() =>
+            <Login
+              login={this.login}
+              loggedIn = {this.state.loggedIn}/>
           } />
           <Route path='/createEvent' component = {CreateEvent} />
           <Route
