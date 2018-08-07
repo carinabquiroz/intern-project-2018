@@ -20,13 +20,25 @@ class ListEvents extends Component {
     super(props);
     this.state = {
       events: [],
+      hosting: [],
+      attending: [],
     };
   }
 
   componentDidMount() {
-    fetch('/events')
+    fetch('/events',{
+      method: 'GET',
+      headers: {
+        'content-type': 'application/json',
+        'x-access-token': window.localStorage.getItem('token'),
+      },
+    })
       .then(res => res.json())
-      .then(events => this.setState({ events }))
+      .then(json => this.setState({
+        events: json.events,
+        hosting: json.hosting,
+        attending: json.attending
+      }))
       .catch(error => console.log(error));
   }
 
@@ -50,7 +62,12 @@ class ListEvents extends Component {
           <ProtectedRoute
             path='/events/myevents'
             component={MyEvents}
-            loggedIn={ this.props.loggedIn } />
+            loggedIn={ this.props.loggedIn }
+            componentProps={{
+              hostingIds: this.state.hosting,
+              attendingIds: this.state.attending,
+              events: this.state.events,
+            }} />
           <Route
             exact path='/events'
             render={() => <EventList events={this.state.events} />}
