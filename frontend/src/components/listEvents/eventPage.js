@@ -35,10 +35,20 @@ class EventPage extends Component {
         <h3>{this.props.info.date}</h3>
         <h3>{this.props.info.time}</h3>
         <h3>{this.props.info.location}</h3>
-        <button
-          onClick={this.attendEvent}>
-          Attend
-        </button>
+        {
+          !this.props.isAttending && !this.props.isHosting &&
+          <button onClick={this.attendEvent}>
+            Attend
+          </button>
+        }
+        {
+          this.props.isHosting &&
+          <div> You are hosting this event! </div>
+        }
+        {
+          this.props.isAttending &&
+          <div> You are attending this event! </div>
+        }
         {this.state.redirect && <Redirect
           to={{
             pathname: '/login',

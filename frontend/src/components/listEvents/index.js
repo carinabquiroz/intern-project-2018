@@ -56,6 +56,8 @@ class ListEvents extends Component {
                   info={event}
                   loggedIn={this.props.loggedIn}
                   {...this.props}
+                  isHosting={this.state.hosting.includes(event.id)}
+                  isAttending={this.state.attending.includes(event.id)}
                   />}
             />
           )}
