@@ -9,9 +9,9 @@ import db from '../db';
 router.get('/', verifyToken, (req, res) => {
   db.user.findOne({ where: { id: req.userId } })
     .then(user => {
-      db.event.findAll({ where: {id: {[Sequelize.Op.or]: user.events } } })
+      db.event.findAll({ where: {id: {[Sequelize.Op.in]: user.events } } })
       .then(attending => {
-        db.event.findAll({ where: {id: {[Sequelize.Op.or]: user.hosting } } })
+        db.event.findAll({ where: {id: {[Sequelize.Op.in]: user.hosting } } })
         .then(hosting => {
           res.json({attending, hosting}).end();
         })
