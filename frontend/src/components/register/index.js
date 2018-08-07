@@ -28,8 +28,8 @@ class Register extends Component {
     this.setState({ password: event.target.value });
   }
 
-  isUniqueUsername(username) {
-    fetch('/checkUniqueUsername', {
+  async isUniqueUsername(username) {
+    return fetch('/checkUniqueUsername', {
       method: 'POST',
       headers: {
         'content-type': 'application/json',
@@ -42,13 +42,13 @@ class Register extends Component {
       })
   }
 
-  handleSubmit(event) {
-    //TODO: make sure passwords meet some standard
+  async handleSubmit(event) {
     event.preventDefault();
-    this.isUniqueUsername(this.state.username);
-    if (this.state.isUnique
+    await this.isUniqueUsername(this.state.username);
+    if (isGoodUsername(this.state.username)
       && isGoodPassword(this.state.password)
-      && isGoodUsername(this.state.username)) {
+      && this.state.isUnique) {
+      this.setState({badRegistration: false})
       register(this.props, this.state);
     } else {this.setState({badRegistration: true})};
   }
