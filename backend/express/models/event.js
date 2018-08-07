@@ -9,4 +9,5 @@ export default {
   time: { type: Sequelize.TIME, allowNull: false},
   location: { type: Sequelize.TEXT, allowNull: false},
   attendees: { type: Sequelize.ARRAY(Sequelize.STRING), allowNull: false},
+  tags: { type: Sequelize.ARRAY(Sequelize.STRING), allowNull: false},
 };
