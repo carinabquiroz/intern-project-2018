@@ -6,9 +6,10 @@ import {
   Link,
 } from 'react-router-dom';
 import styled from 'styled-components';
-import EventPage, { NotFound } from '../eventPage/';
+import EventPage, { NotFound } from './eventPage';
 import EventList from './eventList';
 import MyEvents from './myevents';
+import ProtectedRoute from '../protectedRoute';
 
 const StyledDiv = styled.div`
   text-align: center;
@@ -25,7 +26,8 @@ class ListEvents extends Component {
   componentDidMount() {
     fetch('/events')
       .then(res => res.json())
-      .then(events => this.setState({ events }));
+      .then(events => this.setState({ events }))
+      .catch(error => console.log(error));
   }
 
   render() {
@@ -45,7 +47,10 @@ class ListEvents extends Component {
                   />}
             />
           )}
-          <Route path='/events/myevents' component={MyEvents} />
+          <ProtectedRoute
+            path='/events/myevents'
+            component={MyEvents}
+            loggedIn={ this.props.loggedIn } />
           <Route
             exact path='/events'
             render={() => <EventList events={this.state.events} />}

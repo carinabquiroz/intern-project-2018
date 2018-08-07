@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { withRouter, Redirect } from 'react-router-dom';
 
 import login from '../../utils/login';
 
@@ -26,21 +27,25 @@ class Login extends Component {
   }
 
   render() {
+    const { from } = this.props.location.state || { from: { pathname: '/' } };
     return (
-      <form onSubmit={ this.handleSubmit }>
-        <label>
-          Username:
-          <input type="text" name="name" onChange={ this.handleUsernameChange }/>
-        </label>
-        <br />
-        <label>
-          Password:
-          <input type="password" name="name" onChange={ this.handlePasswordChange }/>
-        </label>
-        <input type="submit" value="Submit" />
-      </form>
+      <div>
+        {this.props.loggedIn && <Redirect to={from} />}
+        <form onSubmit={ this.handleSubmit }>
+          <label>
+            Username:
+            <input type="text" name="name" onChange={ this.handleUsernameChange }/>
+          </label>
+          <br />
+          <label>
+            Password:
+            <input type="password" name="name" onChange={ this.handlePasswordChange }/>
+          </label>
+          <input type="submit" value="Submit" />
+        </form>
+      </div>
     );
   }
 };
 
-export default Login;
+export default withRouter(Login);

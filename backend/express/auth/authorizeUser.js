@@ -8,7 +8,7 @@ const verifyToken = (req, res, next) => {
     req.userId = decoded.id;
     req.username = decoded.username;
   } catch (error) {
-    return res.status(500).send({ auth: false, message: 'Failed to authenticate token.' });
+    return res.status(403).send({ auth: false, message: 'Failed to authenticate token.' });
   }
 
   next();
