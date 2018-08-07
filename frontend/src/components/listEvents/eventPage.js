@@ -9,7 +9,7 @@ class EventPage extends Component {
   }
 
   attendEvent() {
-    if (this.state.loggedIn) {
+    if (this.props.loggedIn) {
       console.log('attending the event');
       fetch('/attendEvent', {
         method: 'POST',
