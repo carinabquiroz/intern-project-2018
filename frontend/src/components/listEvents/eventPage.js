@@ -21,6 +21,7 @@ class EventPage extends Component {
       })
         .then(res => {
           console.log(res.status);
+          this.props.loadEvents()
         });
     } else {
       this.setState({ redirect: true });
