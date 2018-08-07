@@ -76,7 +76,10 @@ class App extends Component {
           <hr />
           <Route exact path='/' component={Home}/>
           <Route path='/register' render={() => <Register login={this.login} />} />
-          <Route path='/login' render={() => <Login login={this.login} />} />
+          <Route path='/login' render={() => <Login
+                login={this.login}
+                loggedIn = {this.state.loggedIn}/>
+          } />
           <Route path='/createEvent' component = {CreateEvent} />
           <Route
             path='/events'

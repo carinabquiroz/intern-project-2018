@@ -14,15 +14,18 @@ class MyEvents extends Component {
           'x-access-token': window.localStorage.getItem('token'),
         },
       })
-        .then(res => res.json())
-        .then(json => {
-          console.log(json);
-          this.setState(
-          {
-            attending: json.attending,
-            hosting: json.hosting,
-          });
-        });
+        .then(res => {
+          console.log(res.status);
+          if (200 <= res.status < 200) {
+            return res.json().then(json => this.setState({
+              attending: json.attending,
+              hosting: json.hosting,
+            }));
+          } else {
+            console.log('something went wrong on the server!!');
+          }
+        }
+      );
   }
 
   render() {
