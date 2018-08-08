@@ -1,11 +1,6 @@
 import React from 'react';
-import { Route, Link } from 'react-router-dom';
-import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 import SearchBar from '../searchBar/';
-
-const StyledDiv = styled.div`
-  text-align: center;
-`;
 
 class EventList extends React.Component {
   constructor (props) {
