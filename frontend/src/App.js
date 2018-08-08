@@ -1,19 +1,16 @@
 import React, { Component } from 'react';
 import {
   BrowserRouter as Router,
-  Route,
-  Link
+  Route
 } from 'react-router-dom';
 import styled from 'styled-components';
 
-import logo from './logo.svg';
 import './App.css';
 import Register from './components/register/';
 import Login from './components/login/';
 import Home from './components/home/';
 import CreateEvent from './components/createEvent/';
 import ListEvents from './components/listEvents/';
-import ProtectedRoute from './components/protectedRoute';
 import Navbar from './components/navbar';
 
 const StyledDiv = styled.div`
