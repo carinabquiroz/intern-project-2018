@@ -4,10 +4,16 @@ import { Redirect } from 'react-router-dom';
 class EventPage extends Component {
   constructor(props) {
     super(props);
-    this.state = { redirect: false };
+    this.state = {
+      redirectLogin: false,
+      redirectMyEvents: false,
+      askDelete: false,
+    };
     this.attendEvent = this.attendEvent.bind(this);
     this.deleteEvent = this.deleteEvent.bind(this);
     this.unattendEvent = this.unattendEvent.bind(this);
+    this.askDelete = this.askDelete.bind(this);
+    this.cancelDelete = this.cancelDelete.bind(this);
   }
 
   attendEvent() {
@@ -25,8 +31,12 @@ class EventPage extends Component {
           this.props.loadEvents()
         });
     } else {
-      this.setState({ redirect: true });
+      this.setState({ redirectLogin: true });
     }
+  }
+
+  askDelete() {
+    this.setState({ askDelete: true })
   }
 
   deleteEvent() {
@@ -40,8 +50,13 @@ class EventPage extends Component {
     })
       .then(res => {
         console.log('event deleted')
+        this.setState({ redirectMyEvents: true })
         this.props.loadEvents()
       })
+  }
+
+  cancelDelete() {
+    this.setState({ askDelete: false })
   }
 
   unattendEvent() {
@@ -75,23 +90,43 @@ class EventPage extends Component {
         }
         {
           this.props.isHosting &&
-          <div><div> You are hosting this event! </div>
-          <button onClick={this.deleteEvent}>
-            Delete Event
-          </button></div>
+          <div>
+            <div> You are hosting this event! </div>
+            {
+              !this.state.askDelete &&
+              <div>
+                <button onClick={this.askDelete}> Delete Event </button>
+              </div>
+            }
+            {
+              this.state.askDelete &&
+              <div>
+                <div> Are you sure you want to delete this event? </div>
+                <div>
+                  <button onClick={this.deleteEvent}> Yes </button>
+                  <button onClick={this.cancelDelete}> No </button>
+                </div>
+              </div>
+            }
+          </div>
         }
         {
           this.props.isAttending &&
-          <div><div> You are attending this event! </div>
-          <button onClick={this.unattendEvent}>
-            Cancel Attendance
-          </button></div>
+          <div>
+            <div> You are attending this event! </div>
+            <button onClick={this.unattendEvent}> Cancel Attendance </button>
+          </div>
         }
-        {this.state.redirect && <Redirect
+        {
+          this.state.redirectLogin && <Redirect
           to={{
             pathname: '/login',
             state: { from: this.props.location },
           }}/>
+        }
+        {
+          this.state.redirectMyEvents && <Redirect
+          to={{pathname: '/events/myevents'}}/>
         }
       </div>
     );
