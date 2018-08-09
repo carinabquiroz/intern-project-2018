@@ -6,7 +6,7 @@ var router = express.Router();
 import db from '../db';
 
 router.get('/', (req, res, next) => {
-  db.event.findAll()
+  db.event.findAll({order: [['id', 'DESC']]})
   .then(events => {
     const token = req.headers['x-access-token'];
     try {

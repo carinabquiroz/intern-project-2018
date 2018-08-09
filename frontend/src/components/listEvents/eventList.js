@@ -27,6 +27,15 @@ class EventList extends React.Component {
     return (
       <ul>
         <SearchBar events={this.props.events} updateEvents = {this.updateEvents} />
+        <br />
+        <label>
+          Sort by
+          <select name='sort' onChange={ this.props.sortBy } >
+            <option value='newest'> Newest </option>
+            <option value='oldest'> Oldest </option>
+            <option value='soonest'> Soonest </option>
+          </select>
+        </label>
         <div>
           {this.state.events.map(event =>
             <li key={event.id}><Link to={'/events/' + event.id}>{event.title}</Link></li>

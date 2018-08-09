@@ -1,5 +1,6 @@
 
 import React, { Component } from 'react';
+import Lodash from 'lodash';
 import {
   Route,
   Switch,
@@ -24,6 +25,7 @@ class ListEvents extends Component {
       attending: [],
     };
     this.loadEvents = this.loadEvents.bind(this);
+    this.sortBy  = this.sortBy.bind(this);
   }
 
   loadEvents() {
@@ -41,6 +43,27 @@ class ListEvents extends Component {
       attending: json.attending
     }))
     .catch(error => console.log(error));
+  }
+
+  sortBy(event) {
+    let iteratees = []
+    let order = ''
+    switch(event.target.value){
+      case 'newest':
+        iteratees = ['id']
+        order = ['desc']
+        break;
+      case 'oldest':
+        iteratees = ['id']
+        order = ['asc']
+        break;
+      case 'soonest':
+        iteratees = ['date', 'time'];
+        order = ['asc', 'asc'];
+        break;
+    }
+    const events = Lodash.orderBy(this.state.events, iteratees, order)
+    this.setState({events})
   }
 
   componentDidMount() {
@@ -79,7 +102,7 @@ class ListEvents extends Component {
             }} />
           <Route
             exact path='/events'
-            render={() => <EventList events={this.state.events} loadEvents={this.loadEvents} />}
+            render={() => <EventList events={this.state.events} loadEvents={this.loadEvents} sortBy={this.sortBy} />}
           />
           <Route path='/events/*' component = {NotFound} />
         </Switch>
