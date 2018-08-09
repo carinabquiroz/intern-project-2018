@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
 
+import DisplayTag from './displayTag';
+
 class DisplayEvent extends Component {
   constructor(props) {
     super(props);
@@ -82,6 +84,7 @@ class DisplayEvent extends Component {
         <h3>{this.props.info.date}</h3>
         <h3>{this.props.info.time}</h3>
         <h3>{this.props.info.location}</h3>
+        {this.props.info.tags.map(tag => <DisplayTag key={tag} name={tag} />) }
         {
           !this.props.isAttending && !this.props.isHosting &&
           <button onClick={this.attendEvent}>

@@ -16,7 +16,7 @@ router.post('/', verifyToken, (req, res) => {
         time: req.body.time,
         location: req.body.location,
         attendees: [],
-        tags: [],
+        tags: req.body.tags,
       })
       .then(event => {
         db.user.update(

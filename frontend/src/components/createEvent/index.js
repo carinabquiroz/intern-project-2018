@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 
+import TagInput from './tagInput';
+
 class CreateEvent extends Component {
   constructor(props) {
     super(props);
@@ -9,37 +11,20 @@ class CreateEvent extends Component {
       date: '',
       time: '',
       location: '',
+      tags: [],
+      submitted: false,
     };
 
-    this.handleTitleChange = this.handleTitleChange.bind(this);
-    this.handleDescriptionChange = this.handleDescriptionChange.bind(this);
-    this.handleDateChange = this.handleDateChange.bind(this);
-    this.handleTimeChange = this.handleTimeChange.bind(this);
-    this.handleLocationChange = this.handleLocationChange.bind(this);
+    this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  handleTitleChange(event) {
-    this.setState({ title: event.target.value });
-  }
-
-  handleDescriptionChange(event) {
-    this.setState({ description: event.target.value });
-  }
-
-  handleDateChange(event) {
-    this.setState({ date: event.target.value });
-  }
-
-  handleTimeChange(event) {
-    this.setState({ time: event.target.value });
-  }
-
-  handleLocationChange(event) {
-    this.setState({ location: event.target.value });
+  handleChange(event) {
+    this.setState({ [event.target.name]: event.target.value });
   }
 
   handleSubmit(event) {
+    event.preventDefault();
     fetch('/createEvent', {
       method: 'POST',
       headers: {
@@ -49,40 +34,78 @@ class CreateEvent extends Component {
       body: JSON.stringify(this.state),
     })
       .then(res => {
-        console.log(res.status);
+        if ((200 <= res.status) && (res.status < 300)) {
+          this.setState({
+            title: '',
+            description: '',
+            date: '',
+            time: '',
+            location: '',
+            tags: [],
+            submitted: true,
+          });
+        }
       });
-    event.preventDefault();
   }
 
   render() {
     return (
-      <form onSubmit={ this.handleSubmit }>
+      <div>
         <label>
           Title:
-          <input type="text" name="name" onChange={ this.handleTitleChange }/>
+          <input
+            type="text"
+            name="title"
+            value={this.state.title}
+            onChange={this.handleChange}/>
         </label>
         <br />
         <label>
           Description:
-          <input type="text" name="name" onChange={ this.handleDescriptionChange }/>
+          <input
+            type="text"
+            name="description"
+            value={this.state.description}
+            onChange={this.handleChange}/>
         </label>
         <br />
         <label>
           Date:
-          <input type="date" name="name" onChange={ this.handleDateChange }/>
+          <input
+            type="date"
+            name="date"
+            value={this.state.date}
+            onChange={this.handleChange}/>
         </label>
         <br />
         <label>
           Time:
-          <input type="time" name="name" onChange={ this.handleTimeChange }/>
+          <input
+            type="time"
+            name="time"
+            value={this.state.time}
+            onChange={this.handleChange}/>
         </label>
         <br />
         <label>
           Location:
-          <input type="text" name="name" onChange={ this.handleLocationChange }/>
+          <input
+            type="text"
+            name="location"
+            value={this.state.location}
+            onChange={this.handleChange}/>
         </label>
-        <input type="submit" value="Submit" />
-      </form>
+        <br />
+        <label>
+          Tags:
+          <TagInput
+            name="tags"
+            onTagChange={this.handleChange}
+            tags={this.state.tags} />
+        </label>
+        <button onClick={this.handleSubmit}>Submit</button>
+        {this.state.submitted && <div>{`You're event has been submitted!`}</div>}
+      </div>
     );
   }
 };
