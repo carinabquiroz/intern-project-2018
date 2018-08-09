@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
 
+import Tag from '../createEvent/tag';
+import TagInput from '../createEvent/tagInput';
+
 class EditEvent extends Component {
   constructor(props) {
     super(props);
@@ -10,6 +13,7 @@ class EditEvent extends Component {
       date: this.props.info.date,
       time: this.props.info.time,
       location: this.props.info.location,
+      tags: this.props.info.tags,
     };
     this.handleChange = this.handleChange.bind(this);
     this.saveEvent = this.saveEvent.bind(this);
@@ -20,6 +24,7 @@ class EditEvent extends Component {
   }
 
   saveEvent(event) {
+    console.log(this.state);
     fetch('/editEvent', {
       method: 'POST',
       headers: {
@@ -37,7 +42,7 @@ class EditEvent extends Component {
   render() {
     return (
       <div>
-        <form onSubmit={ this.saveEvent }>
+        <div>
           <label>
             Title:
             <input type="text" name="title" value={this.state.title} onChange={ this.handleChange }/>
@@ -63,8 +68,15 @@ class EditEvent extends Component {
             <input type="text" name="location" value={this.state.location} onChange={ this.handleChange }/>
           </label>
           <br />
-          <input type="submit" value="Save" />
-        </form>
+          <label>
+            Tags:
+            <TagInput
+              name="tags"
+              onTagChange={this.handleChange}
+              tags={this.state.tags} />
+          </label>
+          <button onClick={this.saveEvent}>Save Changes</button>
+        </div>
         <button onClick={this.props.cancelEdit}> Cancel </button>
       </div>
     );

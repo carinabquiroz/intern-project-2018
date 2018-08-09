@@ -13,6 +13,7 @@ router.post('/', verifyToken, (req, res) => {
         date: req.body.date,
         time: req.body.time,
         location: req.body.location,
+        tags: req.body.tags,
       })
       .then(() => res.end())
     })
