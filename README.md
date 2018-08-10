@@ -6,7 +6,7 @@ To start up the backend and database:
 ```
 cd ./backend
 yarn
-yarn dev
+yarn start
 ```
 
 To start up the frontend:
