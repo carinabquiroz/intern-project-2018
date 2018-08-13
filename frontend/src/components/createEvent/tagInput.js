@@ -12,12 +12,25 @@ const Entry = styled.input`
   margin-left: 10px;
   height: 20px;
   flex-grow: 1;
+
+  :focus {
+    outline-color: #CBD0E0;
+  }
 `;
 
 const TagContainer = styled.div`
   display: flex;
   margin-bottom: 10px;
   font-size: 20px;
+`;
+
+const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+
+const Error = styled.div`
+  font-size: 15px;
 `;
 
 class TagInput extends Component {
@@ -64,17 +77,17 @@ class TagInput extends Component {
 
   render() {
     return (
-      <div>
+      <Container>
         <TagContainer>
           {this.props.tags.map(tag => <Tag key={tag} name={tag} deleteTag={this.removeTag}/>)}
         </TagContainer>
-        <form onSubmit={ this.addTag }>
+        <form onSubmit={ this.addTag } autocomplete="off">
           <Label>Tags:
             <Entry type="text" name="tag" value={this.state.newTag} onChange={ this.handleChange } />
-            {this.state.repeatTag && <div>{`You've already used this tag`}</div>}
           </Label>
         </form>
-      </div>
+        {this.state.repeatTag && <Error>{`You've already used this tag`}</Error>}
+      </Container>
     );
   }
 }

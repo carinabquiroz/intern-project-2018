@@ -33,6 +33,11 @@ const Submit = styled.button`
   font-size: 20px;
   border-radius: 5px;
   background-color: #CBD0E0;
+  outline: none;
+`;
+
+const Submitted = styled.div`
+  margin-top: 30px;
 `;
 
 const StyledText = styled.textarea`
@@ -102,7 +107,8 @@ class CreateEvent extends Component {
             type="text"
             name="title"
             value={this.state.title}
-            onChange={this.handleChange}/>
+            onChange={this.handleChange}
+            autoComplete="off"/>
         </Label>
         <br />
         <Label>
@@ -111,7 +117,8 @@ class CreateEvent extends Component {
             type="text"
             name="description"
             value={this.state.description}
-            onChange={this.handleChange}/>
+            onChange={this.handleChange}
+            autoComplete="off" />
         </Label>
         <br />
         <Label>
@@ -120,7 +127,8 @@ class CreateEvent extends Component {
             type="date"
             name="date"
             value={this.state.date}
-            onChange={this.handleChange}/>
+            onChange={this.handleChange}
+            autoComplete="off" />
         </Label>
         <br />
         <Label>
@@ -129,7 +137,8 @@ class CreateEvent extends Component {
             type="time"
             name="time"
             value={this.state.time}
-            onChange={this.handleChange}/>
+            onChange={this.handleChange}
+            autoComplete="off" />
         </Label>
         <br />
         <Label>
@@ -138,7 +147,8 @@ class CreateEvent extends Component {
             type="text"
             name="location"
             value={this.state.location}
-            onChange={this.handleChange}/>
+            onChange={this.handleChange}
+            autoComplete="off" />
         </Label>
         <br />
         <TagInput
@@ -146,11 +156,11 @@ class CreateEvent extends Component {
           onTagChange={this.handleChange}
           tags={this.state.tags} />
         <Submit onClick={this.handleSubmit}>Create Event</Submit>
-        {this.state.submitted && <div>{`You're event has been submitted!`}</div>}
+        {this.state.submitted && <Submitted>{`You're event has been submitted!`}</Submitted>}
       </Container>
     );
   }
 };
 
-export { Container, Label, Entry, Submit, StyledText };
+export { Container, Label, Entry, Submit, StyledText, Submitted };
 export default CreateEvent;
