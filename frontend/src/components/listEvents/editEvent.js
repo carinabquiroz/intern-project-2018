@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 
 import Tag from '../createEvent/tag';
 import TagInput from '../createEvent/tagInput';
+import { Container, Label, Entry, Submit, StyledText} from '../createEvent';
 
 class EditEvent extends Component {
   constructor(props) {
@@ -41,44 +42,41 @@ class EditEvent extends Component {
 
   render() {
     return (
-      <div>
+      <Container>
         <div>
-          <label>
+          <Label>
             Title:
-            <input type="text" name="title" value={this.state.title} onChange={ this.handleChange }/>
-          </label>
+            <Entry type="text" name="title" value={this.state.title} onChange={ this.handleChange }/>
+          </Label>
           <br />
-          <label>
+          <Label>
             Description:
-            <input type="text" name="description" value={this.state.description} onChange={ this.handleChange }/>
-          </label>
+            <StyledText type="text" name="description" value={this.state.description} onChange={ this.handleChange }/>
+          </Label>
           <br />
-          <label>
+          <Label>
             Date:
-            <input type="date" name="date" value={this.state.date} onChange={ this.handleChange }/>
-          </label>
+            <Entry type="date" name="date" value={this.state.date} onChange={ this.handleChange }/>
+          </Label>
           <br />
-          <label>
+          <Label>
             Time:
-            <input type="time" name="time" value={this.state.time} onChange={ this.handleChange }/>
-          </label>
+            <Entry type="time" name="time" value={this.state.time} onChange={ this.handleChange }/>
+          </Label>
           <br />
-          <label>
+          <Label>
             Location:
-            <input type="text" name="location" value={this.state.location} onChange={ this.handleChange }/>
-          </label>
+            <Entry type="text" name="location" value={this.state.location} onChange={ this.handleChange }/>
+          </Label>
           <br />
-          <label>
-            Tags:
-            <TagInput
-              name="tags"
-              onTagChange={this.handleChange}
-              tags={this.state.tags} />
-          </label>
-          <button onClick={this.saveEvent}>Save Changes</button>
+          <TagInput
+            name="tags"
+            onTagChange={this.handleChange}
+            tags={this.state.tags} />
+          <Submit onClick={this.saveEvent}>Save Changes</Submit>
         </div>
-        <button onClick={this.props.cancelEdit}> Cancel </button>
-      </div>
+        <Submit onClick={this.props.cancelEdit}> Cancel </Submit>
+      </Container>
     );
   }
 }
