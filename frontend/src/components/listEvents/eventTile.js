@@ -2,9 +2,12 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
+import arrow from '../../resources/right-arrow.svg';
+
 const StyledLink = styled(Link)`
   display: flex;
   align-items: right;
+  justify-content: space-between;
   text-decoration: none;
   width: 300px;
   height: 150px;
@@ -19,6 +22,14 @@ const StyledLink = styled(Link)`
   }
 `;
 
+const ArrowDiv = styled.div`
+  background-image: url(${arrow});
+  width: 20px;
+  height: 20px;
+  align-self: flex-end;
+  margin: 0 20px 10px 0;
+`;
+
 const TitleDiv = styled.div`
   margin-top: auto;
   margin-bottom: 20px;
@@ -31,6 +42,7 @@ const TitleDiv = styled.div`
 const EventTile = props =>
   <StyledLink to={props.to}>
       <TitleDiv>{props.title}</TitleDiv>
+      <ArrowDiv />
   </StyledLink>;
 
 export default EventTile;
