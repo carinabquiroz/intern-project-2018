@@ -48,6 +48,6 @@ const MyEvents = (props) => {
   </Container>
 
 );
-}
+};
 
 export default MyEvents;

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 
 import Tag from '../createEvent/tag';
 import TagInput from '../createEvent/tagInput';
+import { Container, Label, Entry, Submit, StyledText, Submitted } from '../createEvent';
 
 class EditEvent extends Component {
   constructor(props) {
@@ -14,17 +15,18 @@ class EditEvent extends Component {
       time: this.props.info.time,
       location: this.props.info.location,
       tags: this.props.info.tags,
+      saved: false,
     };
     this.handleChange = this.handleChange.bind(this);
     this.saveEvent = this.saveEvent.bind(this);
   }
 
   handleChange(event) {
-    this.setState({ [event.target.name]: event.target.value })
+    this.setState({ [event.target.name]: event.target.value, saved: false });
   }
 
   saveEvent(event) {
-    console.log(this.state);
+    this.setState({ saved: true });
     fetch('/editEvent', {
       method: 'POST',
       headers: {
@@ -41,44 +43,41 @@ class EditEvent extends Component {
 
   render() {
     return (
-      <div>
+      <Container>
         <div>
-          <label>
-            Title:
-            <input type="text" name="title" value={this.state.title} onChange={ this.handleChange }/>
-          </label>
+          <Label>
+            Event Name:
+            <Entry type="text" name="title" value={this.state.title} onChange={ this.handleChange } autoComplete="off" />
+          </Label>
           <br />
-          <label>
+          <Label>
             Description:
-            <input type="text" name="description" value={this.state.description} onChange={ this.handleChange }/>
-          </label>
+            <StyledText type="text" name="description" value={this.state.description} onChange={ this.handleChange } autoComplete="off" />
+          </Label>
           <br />
-          <label>
+          <Label>
             Date:
-            <input type="date" name="date" value={this.state.date} onChange={ this.handleChange }/>
-          </label>
+            <Entry type="date" name="date" value={this.state.date} onChange={ this.handleChange } autoComplete="off" />
+          </Label>
           <br />
-          <label>
+          <Label>
             Time:
-            <input type="time" name="time" value={this.state.time} onChange={ this.handleChange }/>
-          </label>
+            <Entry type="time" name="time" value={this.state.time} onChange={ this.handleChange } autoComplete="off" />
+          </Label>
           <br />
-          <label>
+          <Label>
             Location:
-            <input type="text" name="location" value={this.state.location} onChange={ this.handleChange }/>
-          </label>
+            <Entry type="text" name="location" value={this.state.location} onChange={ this.handleChange } autoComplete="off" />
+          </Label>
           <br />
-          <label>
-            Tags:
-            <TagInput
-              name="tags"
-              onTagChange={this.handleChange}
-              tags={this.state.tags} />
-          </label>
-          <button onClick={this.saveEvent}>Save Changes</button>
+          <TagInput
+            name="tags"
+            onTagChange={this.handleChange}
+            tags={this.state.tags} autoComplete="off" />
+          {this.state.saved ? <Submitted>{`You're event has been saved`}</Submitted> : <Submit onClick={this.saveEvent}>Save Changes</Submit>}
         </div>
-        <button onClick={this.props.cancelEdit}> Cancel </button>
-      </div>
+        {this.state.saved ? <Submit onClick={this.props.cancelEdit}>Back</Submit> : <Submit onClick={this.props.cancelEdit}>Cancel</Submit>}
+      </Container>
     );
   }
 }

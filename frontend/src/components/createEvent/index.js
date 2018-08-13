@@ -1,6 +1,56 @@
 import React, { Component } from 'react';
+import styled from 'styled-components';
 
 import TagInput from './tagInput';
+
+const Container = styled.div`
+  font-size: 25px;
+  display: flex;
+  flex-direction: column;
+  width: 600px;
+  margin: auto;
+`;
+
+const Label = styled.label`
+  display: flex;
+  width: 600px;
+`;
+
+const Entry = styled.input`
+  margin-left: 10px;
+  height: 20px;
+  flex-grow: 1;
+  font-size: 15px;
+
+  :focus {
+    outline-color: #CBD0E0;
+  }
+`;
+
+const Submit = styled.button`
+  margin-top: 30px;
+  align-self: center;
+  font-size: 20px;
+  border-radius: 5px;
+  background-color: #CBD0E0;
+  outline: none;
+`;
+
+const Submitted = styled.div`
+  margin-top: 30px;
+`;
+
+const StyledText = styled.textarea`
+  margin-left: 10px;
+  height: 20px;
+  flex-grow: 1;
+  height: 50px;
+  font-size: 15px;
+
+  :focus {
+    outline-color: #CBD0E0;
+  }
+`;
 
 class CreateEvent extends Component {
   constructor(props) {
@@ -50,64 +100,67 @@ class CreateEvent extends Component {
 
   render() {
     return (
-      <div>
-        <label>
-          Title:
-          <input
+      <Container>
+        <Label>
+          {`Event Name`}:
+          <Entry
             type="text"
             name="title"
             value={this.state.title}
-            onChange={this.handleChange}/>
-        </label>
+            onChange={this.handleChange}
+            autoComplete="off"/>
+        </Label>
         <br />
-        <label>
+        <Label>
           Description:
-          <input
+          <StyledText
             type="text"
             name="description"
             value={this.state.description}
-            onChange={this.handleChange}/>
-        </label>
+            onChange={this.handleChange}
+            autoComplete="off" />
+        </Label>
         <br />
-        <label>
+        <Label>
           Date:
-          <input
+          <Entry
             type="date"
             name="date"
             value={this.state.date}
-            onChange={this.handleChange}/>
-        </label>
+            onChange={this.handleChange}
+            autoComplete="off" />
+        </Label>
         <br />
-        <label>
+        <Label>
           Time:
-          <input
+          <Entry
             type="time"
             name="time"
             value={this.state.time}
-            onChange={this.handleChange}/>
-        </label>
+            onChange={this.handleChange}
+            autoComplete="off" />
+        </Label>
         <br />
-        <label>
+        <Label>
           Location:
-          <input
+          <Entry
             type="text"
             name="location"
             value={this.state.location}
-            onChange={this.handleChange}/>
-        </label>
+            onChange={this.handleChange}
+            autoComplete="off" />
+        </Label>
         <br />
-        <label>
-          Tags:
-          <TagInput
-            name="tags"
-            onTagChange={this.handleChange}
-            tags={this.state.tags} />
-        </label>
-        <button onClick={this.handleSubmit}>Submit</button>
-        {this.state.submitted && <div>{`You're event has been submitted!`}</div>}
-      </div>
+        <TagInput
+          name="tags"
+          onTagChange={this.handleChange}
+          tags={this.state.tags} />
+        <Submit onClick={this.handleSubmit}>Create Event</Submit>
+        {this.state.submitted && <Submitted>{`You're event has been submitted!`}</Submitted>}
+      </Container>
     );
   }
 };
 
+export { Container, Label, Entry, Submit, StyledText, Submitted };
 export default CreateEvent;
