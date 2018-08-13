@@ -12,6 +12,7 @@ import Home from './components/home/';
 import CreateEvent from './components/createEvent/';
 import ListEvents from './components/listEvents/';
 import Navbar from './components/navbar';
+import TitleBar from './components/titleBar';
 
 const StyledDiv = styled.div`
   text-align: center;
@@ -65,11 +66,11 @@ class App extends Component {
     return (
       <Router>
         <StyledDiv>
+          {TitleBar}
           <Navbar
             loggedIn={this.state.loggedIn}
             checkAuth={this.checkAuth}
             logout={this.logout}/>
-          <hr />
           <Route exact path='/' component={Home}/>
           <Route path='/register' render={() =>
             <Register

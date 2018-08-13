@@ -4,11 +4,12 @@ import styled from 'styled-components';
 import Navlink from './navlink';
 
 const NavContainer = styled.header`
+  margin-bottom: 20px;
   display: flex;
   flex-direction: row;
   text-align: center;
   justify-content: center;
-  padding: 10px 0;
+  background: #E49273;
 `;
 
 const ConditionalLinks = styled.div`
