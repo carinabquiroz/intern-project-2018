@@ -7,6 +7,11 @@ const TagContainer = styled.div`
   background-color: #e3a48d;
   padding: 0 5px;
   border-radius: 5px;
+
+  :active {
+    background-color: #A37A74;
+    border-color: #A37A74;
+  }
 `;
 
 const Span = styled.span`
