@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { withRouter, Redirect } from 'react-router-dom';
-
+import styled from 'styled-components';
 import register from '../../utils/register';
 import isGoodPassword from '../../utils/password';
 import isGoodUsername from '../../utils/username';
@@ -62,16 +62,23 @@ class Register extends Component {
       <div>
         {this.props.loggedIn && <Redirect to={from} />}
         <form onSubmit={ this.handleSubmit }>
-          <label>
+          <Block>
             Username:
             <input type="text" name="name" onChange={ this.handleUsernameChange }/>
-          </label>
+            <Text> Minimum of four characters</Text>
+          </Block>
           <br />
-          <label>
+          <br />
+          <Block>
             Password:
             <input type="password" name="name" onChange={ this.handlePasswordChange }/>
-          </label>
+            <Text> Minimun of eight characters.
+            Should include a capital letter, lowercase letter, number, and special character
+            </Text>
+          </Block>
+          <br />
           <input type="submit" value="Submit" />
+          <br />
           {this.state.badRegistration &&
             <div>Could not make account. Username or password is bad.</div>}
         </form>
@@ -79,5 +86,15 @@ class Register extends Component {
     );
   }
 };
+
+const Block = styled.label`
+  display: flex;
+  justify-content: center
+  align-items: center
+`
+const Text = styled.div`
+  display: block;
+  width: 300px;
+`;
 
 export default withRouter(Register);
