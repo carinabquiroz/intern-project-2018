@@ -14,6 +14,10 @@ import ProtectedRoute from '../protectedRoute';
 
 const StyledDiv = styled.div`
   text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
 `;
 
 class ListEvents extends Component {

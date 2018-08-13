@@ -1,6 +1,24 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import styled from 'styled-components';
+
 import SearchBar from '../searchBar/';
+import EventTile from './eventTile';
+
+const EventsDiv = styled.div`
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: center;
+`;
+
+const StyledLabel = styled.label`
+  font-size: 15px;
+`;
+
+const StyledSelect = styled.select`
+  margin: 0 10px;
+`;
 
 class EventList extends React.Component {
   constructor (props) {
@@ -25,23 +43,23 @@ class EventList extends React.Component {
 
   render() {
     return (
-      <ul>
+      <div>
         <SearchBar events={this.props.events} updateEvents = {this.updateEvents} />
         <br />
-        <label>
+        <StyledLabel>
           Sort by
-          <select name='sort' onChange={ this.props.sortBy } >
+          <StyledSelect name='sort' onChange={ this.props.sortBy } >
             <option value='newest'> Newest </option>
             <option value='oldest'> Oldest </option>
             <option value='soonest'> Soonest </option>
-          </select>
-        </label>
-        <div>
+          </StyledSelect>
+        </StyledLabel>
+        <EventsDiv>
           {this.state.events.map(event =>
-            <li key={event.id}><Link to={'/events/' + event.id}>{event.title}</Link></li>
+            <EventTile to={'/events/' + event.id} key={event.id} title={event.title}/>
           )}
-        </div>
-      </ul>
+        </EventsDiv>
+      </div>
   );
   };
 };
