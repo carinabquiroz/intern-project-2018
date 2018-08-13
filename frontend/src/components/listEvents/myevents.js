@@ -1,5 +1,22 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import styled from 'styled-components';
+
+import EventTile from './eventTile';
+import { EventsDiv } from './eventList';
+
+const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+
+const Label = styled.label`
+  font-size: 20px;
+  font-weight: bold;
+  margin-top: 40px;
+  padding-left: 5px;
+  text-align: left;
+`;
 
 const MyEvents = (props) => {
   const hostingIds = props.hostingIds;
@@ -15,16 +32,20 @@ const MyEvents = (props) => {
     }
   });
   return (
-  <div>
-    <div>Hosting</div>
-    {hostingEvents.map(event =>
-      <li key={event.id}><Link to={'/events/' + event.id}>{event.title}</Link></li>
-    )}
-    <div>Attending</div>
-    {attendingEvents.map(event =>
-      <li key={event.id}><Link to={'/events/' + event.id}>{event.title}</Link></li>
-    )}
-  </div>
+  <Container>
+    <Label>Hosting</Label>
+    <EventsDiv>
+      {hostingEvents.map(event =>
+        <EventTile key={event.id} to={'/events/' + event.id} title={event.title} />
+      )}
+    </EventsDiv>
+    <Label>Attending</Label>
+    <EventsDiv>
+      {attendingEvents.map(event =>
+        <EventTile key={event.id} to={'/events/' + event.id} title={event.title} />
+      )}
+    </EventsDiv>
+  </Container>
 
 );
 }

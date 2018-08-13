@@ -64,4 +64,5 @@ class EventList extends React.Component {
   };
 };
 
+export { EventsDiv };
 export default EventList;
