@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 import Tag from '../createEvent/tag';
 import TagInput from '../createEvent/tagInput';
-import { Container, Label, Entry, Submit, StyledText} from '../createEvent';
+import { Container, Label, Entry, Submit, StyledText } from '../createEvent';
 
 class EditEvent extends Component {
   constructor(props) {

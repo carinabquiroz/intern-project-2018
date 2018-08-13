@@ -27,6 +27,6 @@ const MyEvents = (props) => {
   </div>
 
 );
-}
+};
 
 export default MyEvents;
