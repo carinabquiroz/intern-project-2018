@@ -43,6 +43,7 @@ const StyledSubmit = styled.button`
   background-repeat: no-repeat;
   background-position: center;
   border: none;
+  outline: none;
 
   :hover {
     background-color: #adaaaa;

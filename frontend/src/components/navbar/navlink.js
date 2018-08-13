@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 const NavDiv = styled.div`
+  font-size: 20px;
+  font-weight: bold;
   padding: 15px 35px;
   :hover {
     background: #BB785F
