@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import TagInput from './tagInput';
 
 const Container = styled.div`
-  font-size: 25px;
+  font-size: 18px;
   display: flex;
   flex-direction: column;
   width: 600px;

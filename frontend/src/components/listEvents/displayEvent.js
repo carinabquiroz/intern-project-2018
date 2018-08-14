@@ -3,6 +3,7 @@ import { Redirect } from 'react-router-dom';
 import styled from 'styled-components';
 import DisplayTag from './displayTag';
 import Moment from 'moment';
+import {Submit} from '../createEvent/index'
 
 class DisplayEvent extends Component {
   constructor(props) {
@@ -87,9 +88,9 @@ class DisplayEvent extends Component {
         <AttendButton>
           {
             !this.props.isAttending && !this.props.isHosting &&
-            <button onClick={this.attendEvent}>
+            <StyledSubmit onClick={this.attendEvent}>
               Attend
-            </button>
+            </StyledSubmit>
           }
           {
             this.props.isHosting &&
@@ -98,7 +99,7 @@ class DisplayEvent extends Component {
               {
                 !this.state.askDelete &&
                 <div>
-                  <button onClick={this.askDelete}> Delete Event </button>
+                  <StyledSubmit onClick={this.askDelete}> Delete Event </StyledSubmit>
                 </div>
               }
               {
@@ -106,19 +107,19 @@ class DisplayEvent extends Component {
                 <div>
                   <div> Are you sure you want to delete this event? </div>
                   <div>
-                    <button onClick={this.deleteEvent}> Yes </button>
-                    <button onClick={this.cancelDelete}> No </button>
+                    <StyledSubmit onClick={this.deleteEvent}> Yes </StyledSubmit>
+                    <StyledSubmit onClick={this.cancelDelete}> No </StyledSubmit>
                   </div>
                 </div>
               }
-              <button onClick={this.props.editEvent}> Edit Event </button>
+              <StyledSubmit onClick={this.props.editEvent}> Edit Event </StyledSubmit>
             </div>
           }
           {
             this.props.isAttending &&
             <div>
               <div> You are attending this event! </div>
-              <button onClick={this.unattendEvent}> Cancel Attendance </button>
+              <StyledSubmit onClick={this.unattendEvent}> Cancel Attendance </StyledSubmit>
             </div>
           }
 
@@ -148,9 +149,9 @@ class DisplayEvent extends Component {
           <AttendButton>
             {
               !this.props.isAttending && !this.props.isHosting &&
-              <button onClick={this.attendEvent}>
+              <StyledSubmit onClick={this.attendEvent}>
                 Attend
-              </button>
+              </StyledSubmit>
             }
             {
               this.props.isHosting &&
@@ -159,7 +160,7 @@ class DisplayEvent extends Component {
                 {
                   !this.state.askDelete &&
                   <div>
-                    <button onClick={this.askDelete}> Delete Event </button>
+                    <StyledSubmit onClick={this.askDelete}> Delete Event </StyledSubmit>
                   </div>
                 }
                 {
@@ -167,19 +168,19 @@ class DisplayEvent extends Component {
                   <div>
                     <div> Are you sure you want to delete this event? </div>
                     <div>
-                      <button onClick={this.deleteEvent}> Yes </button>
-                      <button onClick={this.cancelDelete}> No </button>
+                      <StyledSubmit onClick={this.deleteEvent}> Yes </StyledSubmit>
+                      <StyledSubmit onClick={this.cancelDelete}> No </StyledSubmit>
                     </div>
                   </div>
                 }
-                <button onClick={this.props.editEvent}> Edit Event </button>
+                <StyledSubmit onClick={this.props.editEvent}> Edit Event </StyledSubmit>
               </div>
             }
             {
               this.props.isAttending &&
               <div>
                 <div> You are attending this event! </div>
-                <button onClick={this.unattendEvent}> Cancel Attendance </button>
+                <StyledSubmit onClick={this.unattendEvent}> Cancel Attendance </StyledSubmit>
               </div>
             }
 
@@ -240,7 +241,7 @@ const Body = styled.div`
 const Details = styled.div`
   margin: 3vw 5vw 10vw 15vw
   align-self: flex-start;
-  white-space: pre
+  white-space: pre-wrap
 `;
 const SideBar = styled.div`
   margin: 0 15vw 0 0;
@@ -256,7 +257,12 @@ const Container = styled.span`
   width: 100vw;
   flex-direction: row-reverse;
   justify-content: space-between
+`;
 
+const StyledSubmit = styled(Submit)`
+  margin: 3px;
+  font-size: 15px
+  border-radius: 3px;
 `;
 
 export default DisplayEvent;
