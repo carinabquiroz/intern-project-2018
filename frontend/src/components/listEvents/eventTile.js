@@ -27,16 +27,17 @@ const ArrowDiv = styled.div`
   width: 20px;
   height: 20px;
   align-self: flex-end;
-  margin: 0 20px 10px 0;
+  margin: 15px 10px;
 `;
 
 const TitleDiv = styled.div`
   margin-top: auto;
   margin-bottom: 20px;
-  padding-left: 10px;
+  padding-left: 20px;
   color: black;
   font-weight: bold;
   font-size: 20px;
+  align-self: flex-start;
 `;
 
 const EventTile = props =>
