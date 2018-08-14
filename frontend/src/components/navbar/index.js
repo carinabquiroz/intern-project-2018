@@ -4,11 +4,12 @@ import styled from 'styled-components';
 import Navlink from './navlink';
 
 const NavContainer = styled.header`
-  margin-bottom: 20px;
+
   display: flex;
   flex-direction: row;
   text-align: center;
   justify-content: center;
+  align-items: center;
   background: #E49273;
 `;
 
@@ -20,9 +21,10 @@ const ConditionalLinks = styled.div`
 const Navbar = props =>
   <NavContainer>
     <Navlink to='/' label='Home' />
-    <Navlink to='/events' label='Events' />
+    {/*<Navlink to='/events' label='Events' />*/}
     {props.loggedIn ?
       <ConditionalLinks>
+        <Navlink to='/events/myevents' label='My Events' />
         <Navlink to='/createEvent' label='Create Event' />
         <div onClick={props.logout}>
           <Navlink to='/' label='Logout' onClick={props.logout} />

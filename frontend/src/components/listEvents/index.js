@@ -77,7 +77,6 @@ class ListEvents extends Component {
   render() {
     return (
       <StyledDiv>
-        <Link to='/events/myevents'>My Events</Link>
         <Switch>
           {this.state.events.map(event =>
             <Route
@@ -105,7 +104,11 @@ class ListEvents extends Component {
               loadEvents: this.loadEvents
             }} />
           <Route
-            exact path='/events'
+            exact path={'/events'}
+            render={() => <EventList events={this.state.events} loadEvents={this.loadEvents} sortBy={this.sortBy} />}
+          />
+          <Route
+            exact path={'/'}
             render={() => <EventList events={this.state.events} loadEvents={this.loadEvents} sortBy={this.sortBy} />}
           />
           <Route path='/events/*' component = {NotFound} />

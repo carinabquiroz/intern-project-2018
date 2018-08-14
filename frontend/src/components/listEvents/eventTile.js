@@ -12,7 +12,7 @@ const StyledLink = styled(Link)`
   width: 300px;
   height: 150px;
   margin: 5px;
-  background: linear-gradient(0deg, rgba(168, 208, 219, .2), rgba(168, 208, 219, 1));
+  background: linear-gradient(180deg, rgba(168, 208, 219, 1), rgba(168, 208, 219, .1));
   border-radius: 5px;
 
   :hover {

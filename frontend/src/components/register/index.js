@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { withRouter, Redirect } from 'react-router-dom';
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
+
 import register from '../../utils/register';
 import isGoodPassword from '../../utils/password';
 import isGoodUsername from '../../utils/username';
@@ -82,6 +84,10 @@ class Register extends Component {
           {this.state.badRegistration &&
             <div>Could not make account. Username or password is bad.</div>}
         </form>
+        <Link to={{
+          pathname: '/login',
+          state: { from },
+        }}>Already a user? Login here</Link>
       </div>
     );
   }
