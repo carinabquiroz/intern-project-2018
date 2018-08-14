@@ -56,7 +56,12 @@ class EventList extends React.Component {
         </StyledLabel>
         <EventsDiv>
           {this.state.events.map(event =>
-            <EventTile to={'/events/' + event.id} key={event.id} title={event.title}/>
+            <EventTile to={'/events/' + event.id}
+              key={event.id}
+              title={event.title} 
+              date={event.date}
+              time={event.time}
+              location={event.location}/>
           )}
         </EventsDiv>
       </div>
