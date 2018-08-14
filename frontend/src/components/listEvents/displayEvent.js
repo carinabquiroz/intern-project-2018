@@ -239,7 +239,8 @@ const Body = styled.div`
 `
 const Details = styled.div`
   margin: 3vw 5vw 10vw 15vw
-  align-self: flex-start
+  align-self: flex-start;
+  white-space: pre
 `;
 const SideBar = styled.div`
   margin: 0 15vw 0 0;
