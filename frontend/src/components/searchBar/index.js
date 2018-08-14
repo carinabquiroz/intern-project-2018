@@ -133,7 +133,7 @@ class SearchBar extends Component {
         </SearchFilters>
         <form onSubmit={this.handleSubmit}>
           <StyledSearch>
-            <StyledInput type="text" name="name" onChange={ this.handleSearchChange } placeholder="Search Events" />
+            <StyledInput type="text" name="name" onChange={ this.handleSearchChange } placeholder="Search Events" autoComplete="off" />
             <StyledSubmit onClick={this.handleSubmit} />
           </StyledSearch>
         </form>
