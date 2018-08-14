@@ -9,7 +9,8 @@ const EventsDiv = styled.div`
   display: flex;
   align-items: center;
   flex-wrap: wrap;
-  justify-content: center;
+  justify-content: felx-start;
+  max-width: 1240px;
 `;
 
 const StyledLabel = styled.label`
@@ -58,7 +59,7 @@ class EventList extends React.Component {
           {this.state.events.map(event =>
             <EventTile to={'/events/' + event.id}
               key={event.id}
-              title={event.title} 
+              title={event.title}
               date={event.date}
               time={event.time}
               location={event.location}/>
