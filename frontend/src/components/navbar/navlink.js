@@ -2,7 +2,10 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
-const NavDiv = styled.div`
+
+
+const NavLink = styled(Link)`
+  text-decoration: none;
   font-size: 20px;
   font-weight: bold;
   padding: 15px 40px;
@@ -12,10 +15,6 @@ const NavDiv = styled.div`
   :active {
     background: #925d4A
   }
-`;
-
-const NavLink = styled(Link)`
-  text-decoration: none;
   color: #FFFFFF
   display: inline-block;
   position: relative;
@@ -23,8 +22,8 @@ const NavLink = styled(Link)`
 `;
 
 const Navlink = props =>
-  <NavDiv>
+  <div>
     <NavLink to={props.to}>{props.label}</NavLink>
-  </NavDiv>;
+  </div>;
 
 export default Navlink;

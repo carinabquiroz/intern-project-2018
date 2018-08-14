@@ -210,11 +210,12 @@ const Tags = styled.div`
 
 const Title = styled.div`
   font-size: 40px;
-  margin-left: 5vw;
+  margin-left: 15vw;
 `;
 
 const AttendButton = styled.div`
-  width: 24vw;
+  margin-right: 15vw
+  width: 22vw;
 `;
 
 const TitleBar = styled.div `
@@ -237,10 +238,11 @@ const Body = styled.div`
   width: 80vw
 `
 const Details = styled.div`
-  margin: 3vw 5vw
+  margin: 3vw 5vw 10vw 15vw
   align-self: flex-start
 `;
 const SideBar = styled.div`
+  margin: 0 15vw 0 0;
   padding: 3vw
   text-align: left;
   height: 100vh;
