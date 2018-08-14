@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import TagInput from './tagInput';
 
 const Container = styled.div`
-  font-size: 25px;
+  font-size: 18px;
   display: flex;
   flex-direction: column;
   width: 600px;
@@ -22,7 +22,6 @@ const Entry = styled.input`
   height: 20px;
   flex-grow: 1;
   font-size: 15px;
-
   :focus {
     outline-color: #CBD0E0;
   }
@@ -53,7 +52,7 @@ const StyledText = styled.textarea`
   flex-grow: 1;
   height: 50px;
   font-size: 15px;
-
+  border-color: #DDDDDD
   :focus {
     outline-color: #CBD0E0;
   }
