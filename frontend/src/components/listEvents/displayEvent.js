@@ -95,7 +95,6 @@ class DisplayEvent extends Component {
           {
             this.props.isHosting &&
             <div>
-              <div> You are hosting this event! </div>
               {
                 !this.state.askDelete &&
                 <div>
@@ -127,6 +126,9 @@ class DisplayEvent extends Component {
       </TitleBar>
       <Container>
       <SideBar>
+        <div> Hosted by {this.props.isHosting && 'you!' }
+        {!this.props.isHosting && this.props.info.creator} </div>
+        <br />
         <div>Date: {date}</div>
         <br />
         <div>Time: {time}</div>
@@ -156,7 +158,6 @@ class DisplayEvent extends Component {
             {
               this.props.isHosting &&
               <div>
-                <div> You are hosting this event! </div>
                 {
                   !this.state.askDelete &&
                   <div>
