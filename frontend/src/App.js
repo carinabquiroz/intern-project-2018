@@ -67,11 +67,15 @@ class App extends Component {
       <Router>
         <StyledDiv>
           {TitleBar}
+          {this.state.loggedIn &&
           <Navbar
             loggedIn={this.state.loggedIn}
             checkAuth={this.checkAuth}
             logout={this.logout}/>
-          <Route exact path='/' component={Home}/>
+          }
+          <Route exact path='/' render={props =>
+            <Home loggedIn={this.state.loggedIn} {...props} />
+          } />
           <Route path='/register' render={() =>
             <Register
               login={this.login}

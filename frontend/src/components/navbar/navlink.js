@@ -5,7 +5,7 @@ import styled from 'styled-components';
 const NavDiv = styled.div`
   font-size: 20px;
   font-weight: bold;
-  padding: 15px 35px;
+  padding: 15px 40px;
   :hover {
     background: #BB785F
   }
@@ -20,8 +20,6 @@ const NavLink = styled(Link)`
   display: inline-block;
   position: relative;
   z-index: 1;
-  padding: 1em 4em;
-  margin: -2em;
 `;
 
 const Navlink = props =>
