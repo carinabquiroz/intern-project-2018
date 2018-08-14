@@ -9,6 +9,7 @@ const Container = styled.div`
   flex-direction: column;
   width: 600px;
   margin: auto;
+  margin-top: 40px;
 `;
 
 const Label = styled.label`
@@ -33,6 +34,12 @@ const Submit = styled.button`
   font-size: 20px;
   border-radius: 5px;
   background-color: #CBD0E0;
+  :hover {
+    background-color: #a4aeca
+  }
+  :active {
+    background-color: #7d8bb3
+  }
   outline: none;
 `;
 
