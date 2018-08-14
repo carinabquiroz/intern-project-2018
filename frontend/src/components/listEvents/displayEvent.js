@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
-
+import styled from 'styled-components';
 import DisplayTag from './displayTag';
+import Moment from 'moment';
 
 class DisplayEvent extends Component {
   constructor(props) {
@@ -77,50 +78,113 @@ class DisplayEvent extends Component {
   }
 
   render() {
+    const date = Moment(this.props.info.date, 'YYYY-MM-DD').format('dddd MMMM Do, YYYY')
+    const time = Moment(this.props.info.time, 'HH:mm:ss').format('h:mm A')
     return (
       <div>
-        <h3>{this.props.info.title}</h3>
-        <h3>{this.props.info.description}</h3>
-        <h3>{this.props.info.date}</h3>
-        <h3>{this.props.info.time}</h3>
-        <h3>{this.props.info.location}</h3>
-        {this.props.info.tags.map(tag => <DisplayTag key={tag} name={tag} />) }
-        {
-          !this.props.isAttending && !this.props.isHosting &&
-          <button onClick={this.attendEvent}>
-            Attend
-          </button>
-        }
-        {
-          this.props.isHosting &&
-          <div>
-            <div> You are hosting this event! </div>
-            {
-              !this.state.askDelete &&
-              <div>
-                <button onClick={this.askDelete}> Delete Event </button>
-              </div>
-            }
-            {
-              this.state.askDelete &&
-              <div>
-                <div> Are you sure you want to delete this event? </div>
+      <TitleBar>
+        <Title> {this.props.info.title} </Title>
+        <AttendButton>
+          {
+            !this.props.isAttending && !this.props.isHosting &&
+            <button onClick={this.attendEvent}>
+              Attend
+            </button>
+          }
+          {
+            this.props.isHosting &&
+            <div>
+              <div> You are hosting this event! </div>
+              {
+                !this.state.askDelete &&
                 <div>
-                  <button onClick={this.deleteEvent}> Yes </button>
-                  <button onClick={this.cancelDelete}> No </button>
+                  <button onClick={this.askDelete}> Delete Event </button>
                 </div>
+              }
+              {
+                this.state.askDelete &&
+                <div>
+                  <div> Are you sure you want to delete this event? </div>
+                  <div>
+                    <button onClick={this.deleteEvent}> Yes </button>
+                    <button onClick={this.cancelDelete}> No </button>
+                  </div>
+                </div>
+              }
+              <button onClick={this.props.editEvent}> Edit Event </button>
+            </div>
+          }
+          {
+            this.props.isAttending &&
+            <div>
+              <div> You are attending this event! </div>
+              <button onClick={this.unattendEvent}> Cancel Attendance </button>
+            </div>
+          }
+
+        </AttendButton>
+      </TitleBar>
+      <Container>
+      <SideBar>
+        <div>Date: {date}</div>
+        <br />
+        <div>Time: {time}</div>
+        <br />
+        <div>Where: {this.props.info.location}</div>
+      </SideBar>
+      <Body>
+        <Details>
+          Details:
+          <br />
+          <br />
+          {this.props.info.description}
+          <br />
+          <br />
+          Tags:
+          <br />
+          <br />
+          <Tags> {this.props.info.tags.map(tag => <DisplayTag key={tag} name={tag} />) } </Tags>
+          <br />
+          <AttendButton>
+            {
+              !this.props.isAttending && !this.props.isHosting &&
+              <button onClick={this.attendEvent}>
+                Attend
+              </button>
+            }
+            {
+              this.props.isHosting &&
+              <div>
+                <div> You are hosting this event! </div>
+                {
+                  !this.state.askDelete &&
+                  <div>
+                    <button onClick={this.askDelete}> Delete Event </button>
+                  </div>
+                }
+                {
+                  this.state.askDelete &&
+                  <div>
+                    <div> Are you sure you want to delete this event? </div>
+                    <div>
+                      <button onClick={this.deleteEvent}> Yes </button>
+                      <button onClick={this.cancelDelete}> No </button>
+                    </div>
+                  </div>
+                }
+                <button onClick={this.props.editEvent}> Edit Event </button>
               </div>
             }
-            <button onClick={this.props.editEvent}> Edit Event </button>
-          </div>
-        }
-        {
-          this.props.isAttending &&
-          <div>
-            <div> You are attending this event! </div>
-            <button onClick={this.unattendEvent}> Cancel Attendance </button>
-          </div>
-        }
+            {
+              this.props.isAttending &&
+              <div>
+                <div> You are attending this event! </div>
+                <button onClick={this.unattendEvent}> Cancel Attendance </button>
+              </div>
+            }
+
+          </AttendButton>
+        </Details>
         {
           this.state.redirectLogin && <Redirect
           to={{
@@ -132,10 +196,64 @@ class DisplayEvent extends Component {
           this.state.redirectMyEvents && <Redirect
           to={{pathname: '/events/myevents'}}/>
         }
+      </Body>
+      </Container>
       </div>
     )
   }
 }
 
+const Tags = styled.div`
+  display: flex
+
+`;
+
+const Title = styled.div`
+  font-size: 40px;
+  margin-left: 5vw;
+`;
+
+const AttendButton = styled.div`
+  width: 24vw;
+`;
+
+const TitleBar = styled.div `
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100vw;
+  height: 15vh;
+  margin: 0;
+  background: #2b4570
+  color: #FFFFFF
+  `;
+
+const Body = styled.div`
+  display: flex
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  text-align: left;
+  width: 80vw
+`
+const Details = styled.div`
+  margin: 3vw 5vw
+  align-self: flex-start
+`;
+const SideBar = styled.div`
+  padding: 3vw
+  text-align: left;
+  height: 100vh;
+  width: 20vw
+  background: #7180AC
+`;
+
+const Container = styled.span`
+  display: flex;
+  width: 100vw;
+  flex-direction: row-reverse;
+  justify-content: space-between
+
+`;
 
 export default DisplayEvent;
