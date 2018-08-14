@@ -79,7 +79,7 @@ class DisplayEvent extends Component {
   }
 
   render() {
-    const date = Moment(this.props.info.date, 'YYYY-MM-DD').format('dddd MMMM Do, YYYY')
+    const date = Moment(this.props.info.date, 'YYYY-MM-DD').format('MMMM Do, YYYY')
     const time = Moment(this.props.info.time, 'HH:mm:ss').format('h:mm A')
     return (
       <div>
