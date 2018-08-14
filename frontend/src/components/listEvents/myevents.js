@@ -36,13 +36,21 @@ const MyEvents = (props) => {
     <Label>Hosting</Label>
     <EventsDiv>
       {hostingEvents.map(event =>
-        <EventTile key={event.id} to={'/events/' + event.id} title={event.title} />
+        <EventTile key={event.id} to={'/events/' + event.id}
+          title={event.title}
+          date={event.date}
+          time={event.time}
+          location={event.location} />
       )}
     </EventsDiv>
     <Label>Attending</Label>
     <EventsDiv>
       {attendingEvents.map(event =>
-        <EventTile key={event.id} to={'/events/' + event.id} title={event.title} />
+        <EventTile key={event.id} to={'/events/' + event.id}
+        title={event.title}
+        date={event.date}
+        time={event.time}
+        location={event.location} />
       )}
     </EventsDiv>
   </Container>
