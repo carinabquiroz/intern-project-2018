@@ -18,6 +18,10 @@ const StyledLink = styled(Link)`
     box-shadow: 5px 5px 1px;
     color: #7180AC;
   }
+  :active {
+    box-shadow: 5px 5px 1px;
+    color: #48536e;
+  }
 `;
 
 const Bottom = styled.div`
