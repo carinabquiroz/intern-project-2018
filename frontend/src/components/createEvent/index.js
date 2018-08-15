@@ -14,7 +14,7 @@ const Container = styled.div`
 
 const Label = styled.label`
   display: flex;
-  width: 600px;
+
 `;
 
 const Entry = styled.input`

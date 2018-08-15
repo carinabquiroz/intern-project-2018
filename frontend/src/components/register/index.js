@@ -6,6 +6,8 @@ import { Link } from 'react-router-dom';
 import register from '../../utils/register';
 import isGoodPassword from '../../utils/password';
 import isGoodUsername from '../../utils/username';
+import {Entry, Label, Submit} from '../createEvent';
+import {StyledContainer} from '../login';
 
 class Register extends Component {
   //TODO: extract out into components, use react-router to make into it's own page
@@ -14,8 +16,9 @@ class Register extends Component {
     this.state = {
       username: '',
       password: '',
-      isUnique: '',
-      badRegistration: false,
+      isUnique: true,
+      isValidPassword: true,
+      isValidUsername: true,
     };
 
     this.handleUsernameChange = this.handleUsernameChange.bind(this);
@@ -46,61 +49,71 @@ class Register extends Component {
   }
 
   async handleSubmit(event) {
+    this.setState({
+      isUnique: true,
+      isValidPassword: true,
+      isValidUsername: true,})
     event.preventDefault();
     await this.isUniqueUsername(this.state.username);
-    if (isGoodUsername(this.state.username)
-      && isGoodPassword(this.state.password)
-      && this.state.isUnique) {
-      this.setState({ badRegistration: false });
+    if (!this.state.isUnique) {
+      return;
+    }
+    else if (!isGoodUsername(this.state.username)) {
+      this.setState({isValidUsername: false})
+      return;
+    }
+    else if (!isGoodPassword(this.state.password)) {
+      this.setState({isValidPassword: false})
+      return;
+    }
+    else {
       register(this.props, this.state);
-    } else {
-      this.setState({ badRegistration: true });
-    };
+    }
   }
 
   render() {
     const { from } = this.props.location.state || { from: { pathname: '/' } };
     return (
-      <div>
+      <StyledContainer>
         {this.props.loggedIn && <Redirect to={from} />}
-        <form onSubmit={ this.handleSubmit }>
-          <Block>
+          <Label>
             Username:
-            <input type="text" name="name" onChange={ this.handleUsernameChange }/>
-            <Text> Minimum of four characters</Text>
-          </Block>
+            <Entry type="text" name="name" onChange={ this.handleUsernameChange }/>
+          </Label>
+          <Text> *Min of four characters, max of fifteen</Text>
+          {!this.state.isUnique && <Error> Username is already in use </Error>}
+          {!this.state.isValidUsername && <Error> Invalid username </Error>}
           <br />
           <br />
-          <Block>
+          <Label>
             Password:
-            <input type="password" name="name" onChange={ this.handlePasswordChange }/>
-            <Text> Minimun of eight characters.
-            Should include a capital letter, lowercase letter, number, and special character
-            </Text>
-          </Block>
+            <Entry type="password" name="name" onChange={ this.handlePasswordChange }/>
+          </Label>
+          <Text> *Min of eight characters.
+          Should include a capital letter, lowercase letter, number, and special character
+          </Text>
+          {!this.state.isValidPassword && <Error> Invalid Password </Error>}
           <br />
-          <input type="submit" value="Submit" />
+          <Submit onClick={this.handleSubmit}>Sign up</Submit>
           <br />
-          {this.state.badRegistration &&
-            <div>Could not make account. Username or password is bad.</div>}
-        </form>
         <Link to={{
           pathname: '/login',
           state: { from },
         }}>Already a user? Login here</Link>
-      </div>
+      </StyledContainer>
     );
   }
 };
 
-const Block = styled.label`
-  display: flex;
-  justify-content: center
-  align-items: center
-`
 const Text = styled.div`
+  font-size: 10px;
   display: block;
   width: 300px;
 `;
 
+const Error = styled.div`
+  color: red;
+`;
+
+export {Error};
 export default withRouter(Register);
