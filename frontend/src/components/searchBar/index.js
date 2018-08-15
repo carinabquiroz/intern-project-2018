@@ -90,6 +90,7 @@ class SearchBar extends Component {
   handleSubmit(event) {
     event.preventDefault();
     const options = {
+      threshold: .3,
       keys: Object.keys(this.state.searchKeys).filter(key => this.state.searchKeys[key]),
       id: 'id',
     };
