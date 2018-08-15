@@ -9,8 +9,14 @@ const EventsDiv = styled.div`
   display: flex;
   align-items: center;
   flex-wrap: wrap;
-  justify-content: flex-start;
+  justify-content: center;
   max-width: 1240px;
+
+  ::after {
+  content: '';
+  width: 350px;
+  flex: auto;
+}
 `;
 
 const StyledLabel = styled.label`
