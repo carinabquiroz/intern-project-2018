@@ -1,16 +1,20 @@
 import React, { Component } from 'react';
 import { withRouter, Redirect, Link } from 'react-router-dom';
+import styled from 'styled-components';
 
 import login from '../../utils/login';
+import {Entry, Container, Label, Submit} from '../createEvent';
+import {Error} from '../register';
 
 class Login extends Component {
   constructor(props) {
     super(props);
-    this.state = { username: '', password: '' };
+    this.state = { username: '', password: '', validLogin: true};
 
     this.handleUsernameChange = this.handleUsernameChange.bind(this);
     this.handlePasswordChange = this.handlePasswordChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.invalidLogin = this.invalidLogin.bind(this);
   }
 
   handleUsernameChange(event) {
@@ -22,34 +26,44 @@ class Login extends Component {
   }
 
   handleSubmit(event) {
-    login(this.props, this.state);
-    event.preventDefault();
+    this.setState({validLogin:true})
+    login(this.props, this.state, this.invalidLogin);
+  }
+
+  invalidLogin() {
+    this.setState({validLogin:false})
   }
 
   render() {
     const { from } = this.props.location.state || { from: { pathname: '/' } };
     return (
-      <div>
+      <StyledContainer>
         {this.props.loggedIn && <Redirect to={from} />}
-        <form onSubmit={ this.handleSubmit }>
-          <label>
+          <Label>
             Username:
-            <input type="text" name="name" onChange={ this.handleUsernameChange }/>
-          </label>
+            <Entry type="text" name="name" onChange={ this.handleUsernameChange }/>
+          </Label>
           <br />
-          <label>
+          <Label>
             Password:
-            <input type="password" name="name" onChange={ this.handlePasswordChange }/>
-          </label>
-          <input type="submit" value="Submit" />
-        </form>
+            <Entry type="password" name="name" onChange={ this.handlePasswordChange }/>
+          </Label>
+          <Submit onClick={this.handleSubmit}>Login</Submit>
+          <br />
+          {!this.state.validLogin && <Error> Invalid login. Try again. </Error>}
+          <br />
         <Link to={{
           pathname: '/register',
           state: { from },
         }}>New? Register here</Link>
-      </div>
+      </StyledContainer>
     );
   }
 };
 
+const StyledContainer = styled(Container)`
+  width: 300px
+`;
+
+export {StyledContainer};
 export default withRouter(Login);
