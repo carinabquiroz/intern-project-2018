@@ -1,4 +1,4 @@
-const login = (props, state) => {
+const login = (props, state, catchError) => {
     fetch('/login', {
       method: 'POST',
       headers: {
@@ -9,6 +9,9 @@ const login = (props, state) => {
     .then(res => {
       if ((200 <= res.status) && (res.status < 300)) {
         return res.json().then(json => props.login(json.token));
+      }
+      else {
+        catchError();
       }
     });
   };
