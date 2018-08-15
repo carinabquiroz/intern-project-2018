@@ -39,7 +39,7 @@ const ArrowDiv = styled.div`
 `;
 
 const TitleDiv = styled.div`
-  margin-bottom: 20px;
+  margin-bottom: 15px;
   padding-left: 20px;
   color: black;
   font-weight: bold;
