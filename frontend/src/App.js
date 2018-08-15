@@ -14,16 +14,28 @@ import ListEvents from './components/listEvents/';
 import Navbar from './components/navbar';
 import TitleBar from './components/titleBar';
 
-const StyledDiv = styled.div`
+const StyledRouterDiv = styled.div`
   text-align: center;
+  flex: 1;
+`;
+
+const StyledDiv = styled.div`
+  position: absolute;
+  display: flex;
+  height: 100%;
+  width: 100%;
+  flex-direction: column;
 `;
 
 const Footer = styled.div`
   margin: 40px auto 5px;
+  padding-bottom: 10px;
   font-size: 10px;
   display: flex;
   flex-direction: row;
+  align-self: flex-end;
   justify-content: center;
+  align-items: center;
 `;
 
 const Line = styled.div`
@@ -81,8 +93,9 @@ class App extends Component {
 
   render() {
     return (
+      <StyledDiv>
       <Router>
-        <StyledDiv>
+      <StyledRouterDiv>
           {TitleBar}
           {this.state.loggedIn &&
           <Navbar
@@ -109,17 +122,18 @@ class App extends Component {
             render={(props) =>
               <ListEvents loggedIn={this.state.loggedIn} {...props} />}
           />
-          <Footer>
-            <div>Icons made by: </div>
-            <Spacer />
-            <div><a href="https://www.flaticon.com/authors/zurb" title="Zurb">Zurb</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></div>
-          <Line />
-          <div><a href="https://www.flaticon.com/authors/lyolya" title="Lyolya">Lyolya</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></div>
-          <Line />
-            <div><a href="https://www.flaticon.com/authors/twitter" title="Twitter">Twitter</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></div>
-          </Footer>
-        </StyledDiv>
+      </StyledRouterDiv>
       </Router>
+      <Footer>
+        <div>Icons made by: </div>
+        <Spacer />
+        <div><a href="https://www.flaticon.com/authors/zurb" title="Zurb">Zurb</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></div>
+      <Line />
+      <div><a href="https://www.flaticon.com/authors/lyolya" title="Lyolya">Lyolya</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></div>
+      <Line />
+        <div><a href="https://www.flaticon.com/authors/twitter" title="Twitter">Twitter</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></div>
+      </Footer>
+      </StyledDiv>
     );
   }
 }

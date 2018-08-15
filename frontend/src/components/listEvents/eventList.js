@@ -9,7 +9,7 @@ const EventsDiv = styled.div`
   display: flex;
   align-items: center;
   flex-wrap: wrap;
-  justify-content: felx-start;
+  justify-content: flex-start;
   max-width: 1240px;
 `;
 

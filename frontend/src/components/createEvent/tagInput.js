@@ -20,6 +20,7 @@ const Entry = styled.input`
 
 const TagContainer = styled.div`
   display: flex;
+  flex-wrap: wrap;
   margin-bottom: 10px;
   font-size: 20px;
 `;
@@ -36,7 +37,7 @@ const Error = styled.div`
 class TagInput extends Component {
   constructor(props) {
     super(props);
-    this.state = { tagArray: props.tags, newTag: '' };
+    this.state = { newTag: '' };
     this.addTag = this.addTag.bind(this);
     this.removeTag = this.removeTag.bind(this);
     this.handleChange = this.handleChange.bind(this);
@@ -50,7 +51,7 @@ class TagInput extends Component {
     event.preventDefault();
     if (this.state.newTag) {
       const newTag = this.state.newTag;
-      const tagArray = this.state.tagArray;
+      const tagArray = this.props.tags;
       if (tagArray.includes(newTag)) {
         this.setState({
           repeatTag: true,
@@ -59,7 +60,6 @@ class TagInput extends Component {
       } else {
         const newTagArray = tagArray.concat([newTag]);
         this.setState({
-          tagArray: newTagArray,
           newTag: '',
         });
         this.props.onTagChange({ target: { name: 'tags', value: newTagArray } });

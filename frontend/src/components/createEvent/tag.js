@@ -2,7 +2,8 @@ import React from 'react';
 import styled from 'styled-components';
 
 const TagContainer = styled.div`
-  margin-right: 10px
+  margin-right: 10px;
+  margin-bottom: 10px;
   border: 2px solid #e3a48d;
   background-color: #e3a48d;
   padding: 0 5px;
