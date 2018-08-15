@@ -6,6 +6,7 @@ import SearchBar from '../searchBar/';
 import EventTile from './eventTile';
 
 const EventsDiv = styled.div`
+  margin-top: 12px;
   display: flex;
   align-items: center;
   flex-wrap: wrap;
