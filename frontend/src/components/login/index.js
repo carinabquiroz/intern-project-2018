@@ -26,8 +26,10 @@ class Login extends Component {
   }
 
   handleSubmit(event) {
+    event.preventDefault();
     this.setState({validLogin:true})
     login(this.props, this.state, this.invalidLogin);
+    this.setState({password: ''});
   }
 
   invalidLogin() {
@@ -39,6 +41,7 @@ class Login extends Component {
     return (
       <StyledContainer>
         {this.props.loggedIn && <Redirect to={from} />}
+        <form onSubmit={this.handleSubmit}>
           <Label>
             Username:
             <Entry type="text" name="name" onChange={ this.handleUsernameChange }/>
@@ -46,12 +49,13 @@ class Login extends Component {
           <br />
           <Label>
             Password:
-            <Entry type="password" name="name" onChange={ this.handlePasswordChange }/>
+            <Entry type="password" name="name" value={this.state.password} onChange={ this.handlePasswordChange }/>
           </Label>
           <Submit onClick={this.handleSubmit}>Login</Submit>
           <br />
           {!this.state.validLogin && <Error> Invalid login. Try again. </Error>}
           <br />
+        </form>
         <Link to={{
           pathname: '/register',
           state: { from },
