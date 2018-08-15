@@ -81,6 +81,7 @@ class DisplayEvent extends Component {
   render() {
     const date = Moment(this.props.info.date, 'YYYY-MM-DD').format('MMMM Do, YYYY')
     const time = Moment(this.props.info.time, 'HH:mm:ss').format('h:mm A')
+    const attendees = this.props.info.attendees.map(user =><div><br />{user}</div>)
     return (
       <div>
       <TitleBar>
@@ -126,14 +127,17 @@ class DisplayEvent extends Component {
       </TitleBar>
       <Container>
       <SideBar>
-        <div> Hosted by {this.props.isHosting && 'you!' }
+        <div> <b>Hosted by {this.props.isHosting && 'you!' }</b>
         {!this.props.isHosting && this.props.info.creator} </div>
         <br />
-        <div>Date: {date}</div>
+        <div><b>Date:</b> {date}</div>
         <br />
-        <div>Time: {time}</div>
+        <div><b>Time:</b> {time}</div>
         <br />
-        <div>Where: {this.props.info.location}</div>
+        <div><b>Where:</b> {this.props.info.location}</div>
+        <br />
+        {this.props.isHosting && <div> <b>Users attending:</b> {attendees} </div>}
+        {!this.props.isHosting && <div> <b>Number attending:</b> {this.props.info.attendees.length} </div>}
       </SideBar>
       <Body>
         <Details>
